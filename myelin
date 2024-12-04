@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Myelin.bio</title>
+    
+    <!-- React -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 16px;
+            background-color: #f5f5f5;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 16px;
+            padding: 20px;
+        }
+        .button {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            margin: 4px;
+            font-size: 16px;
+        }
+        .button:hover {
+            background: #f3f4f6;
+        }
+        .button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .metric-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .metric-card {
+            background: #f8f9fa;
+            padding: 16px;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .metric-header {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .metric-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+        .metric-description {
+            font-size: 14px;
+            color: #666;
+            margin-top: 8px;
+        }
+        .error {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+        }
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .bar-container {
+            background: #f0f0f0;
+            margin: 4px 0;
+            border-radius: 4px;
+            overflow: hidden;
+            height: 20px;
+            width: 100%;
+        }
+        .bar {
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+        .taxa-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .taxa-card {
+            background: #f8f9fa;
+            padding: 16px;
+            border-radius: 6px;
+        }
+        .taxa-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .taxa-abundance {
+            font-size: 16px;
+            margin-top: 8px;
+        }
+        h2 {
+            text-align: center;
+        }
+        .scroll-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function MyelinBio() {
+            const [data, setData] = useState(null);
+            const [metrics, setMetrics] = useState(null);
+            const [loading, setLoading] = useState(false);
+            const [error, setError] = useState('');
+            const [currentPage, setCurrentPage] = useState(0);
+
+            const sampleData = `Taxa\tAbundance
+Bacteroides\t45
+Prevotella\t30
+Faecalibacterium\t25
+Roseburia\t15
+Bifidobacterium\t20
+Lactobacillus\t10
+Escherichia_coli\t5
+Clostridium\t8`;
+
+            const goodTaxa = [
+                'Bacteroides', 'Faecalibacterium', 'Roseburia', 'Bifidobacterium', 'Lactobacillus',
+                'Akkermansia', 'Eubacterium', 'Ruminococcus', 'Butyrivibrio', 'Propionibacterium'
+            ];
+            const badTaxa = [
+                'Escherichia', 'Clostridium', 'Enterococcus', 'Staphylococcus', 'Klebsiella',
+                'Proteus', 'Pseudomonas', 'Salmonella', 'Shigella', 'Campylobacter'
+            ];
+
+            const calculateMetrics = (abundances) => {
+                try {
+                    const total = abundances.reduce((sum, val) => sum + val, 0);
+                    const proportions = abundances.map(a => a / total);
+                    
+                    // Shannon diversity
+                    const shannon = -proportions
+                        .filter(p => p > 0)
+                        .reduce((sum, p) => sum + p * Math.log(p), 0);
+
+                    // Simpson diversity
+                    const simpson = 1 - proportions.reduce((sum, p) => sum + p * p, 0);
+
+                    // Richness
+                    const richness = abundances.filter(a => a > 0).length;
+
+                    // Evenness
+                    const evenness = shannon / Math.log(richness);
+
+                    // Berger-Parker dominance
+                    const bergerParker = Math.max(...proportions);
+
+                    // Margalef diversity
+                    const margalef = (richness - 1) / Math.log(total);
+
+                    return {
+                        shannon,
+                        simpson,
+                        richness,
+                        evenness,
+                        bergerParker,
+                        margalef
+                    };
+                } catch (error) {
+                    throw new Error('Error calculating metrics');
+                }
+            };
+
+            const processData = (text) => {
+                try {
+                    const rows = text.trim().split('\n');
+                    let headers = rows[0].split('\t');
+                    let dataRows = rows.slice(1);
+
+                    // Check if the first row is a header or data
+                    if (!isNaN(Number(headers[1]))) {
+                        dataRows = rows;
+                        headers = ['Taxa', 'Abundance'];
+                    }
+
+                    if (headers.length !== 2) {
+                        throw new Error('File must have exactly 2 columns: Taxa and Abundance');
+                    }
+
+                    const abundances = dataRows
+                        .map(row => {
+                            const [taxon, abundance] = row.split('\t');
+                            const num = Number(abundance);
+                            if (isNaN(num) || num < 0) {
+                                throw new Error('Invalid abundance value found');
+                            }
+                            return num;
+                        });
+
+                    const taxa = dataRows.map(row => row.split('\t')[0].split('_')[0]);
+
+                    setData({
+                        taxa: taxa,
+                        abundances: abundances
+                    });
+
+                    const metrics = calculateMetrics(abundances);
+                    setMetrics(metrics);
+                    setError('');
+                } catch (error) {
+                    setError(error.message || 'Error processing file');
+                    setData(null);
+                    setMetrics(null);
+                }
+            };
+
+            const handleFileUpload = (event) => {
+                setLoading(true);
+                const file = event.target.files[0];
+                const reader = new FileReader();
+
+                reader.onload = (e) => {
+                    processData(e.target.result);
+                    setLoading(false);
+                };
+
+                reader.onerror = () => {
+                    setError('Error reading file');
+                    setLoading(false);
+                };
+
+                reader.readAsText(file);
+            };
+
+            const handleUseSampleData = () => {
+                setLoading(true);
+                processData(sampleData);
+                setLoading(false);
+            };
+
+            const metricDescriptions = {
+                shannon: "Shannon diversity index measures the diversity in a community. Higher values indicate more diversity. It accounts for both abundance and evenness of the species present.",
+                simpson: "Simpson diversity index measures the probability that two individuals randomly selected from a sample will belong to the same species. Lower values indicate more diversity. It is less sensitive to species richness.",
+                richness: "Richness is the count of different species present in the sample. It does not account for the abundance of the species.",
+                evenness: "Evenness measures how evenly the individuals are distributed among the different species. It ranges from 0 to 1, with 1 being complete evenness.",
+                bergerParker: "Berger-Parker dominance index measures the proportion of the most abundant species. Lower values indicate more diversity. It is a measure of dominance.",
+                margalef: "Margalef diversity index is a measure of species richness that accounts for the number of individuals. It is calculated as (S-1)/ln(N), where S is the number of species and N is the number of individuals."
+            };
+
+            const handleNextPage = () => {
+                setCurrentPage(currentPage + 1);
+            };
+
+            const handlePrevPage = () => {
+                setCurrentPage(currentPage - 1);
+            };
+
+            const taxaPerPage = 10;
+            const startIndex = currentPage * taxaPerPage;
+            const endIndex = startIndex + taxaPerPage;
+            const paginatedTaxa = data ? data.taxa.slice(startIndex, endIndex) : [];
+            const paginatedAbundances = data ? data.abundances.slice(startIndex, endIndex) : [];
+
+            return (
+                <div className="container">
+                    <div className="card">
+                        <h2>Myelin.bio</h2>
+                        <div style={{textAlign: 'center', marginBottom: '20px'}}>
+                            <label className="button">
+                                <input
+                                    type="file"
+                                    accept=".csv,.tsv,.txt"
+                                    onChange={handleFileUpload}
+                                    style={{display: 'none'}}
+                                />
+                                Upload Data
+                            </label>
+                            <button className="button" onClick={handleUseSampleData} disabled={loading}>
+                                Try Sample Data
+                            </button>
+                            <p style={{color: '#666', fontSize: '14px', marginTop: '10px'}}>
+                                Upload a tab-separated file with taxa names in the first column and abundances in the second
+                            </p>
+                        </div>
+                    </div>
+
+                    {error && <div className="error">{error}</div>}
+
+                    {loading && <div className="spinner" />}
+
+                    {data && !loading && (
+                        <div className="card">
+                            <h2>Taxa and Abundance</h2>
+                            <div className="taxa-grid">
+                                {paginatedTaxa.map((taxon, index) => {
+                                    const abundance = paginatedAbundances[index];
+                                    const totalAbundance = data.abundances.reduce((sum, val) => sum + val, 0);
+                                    const relativeAbundance = (abundance / totalAbundance) * 100;
+                                    const isGood = goodTaxa.includes(taxon);
+                                    const isBad = badTaxa.includes(taxon);
+                                    const colors = ['#FF7F50', '#90EE90', '#3498db']; // Pastel Red, Green, and Blue
+                                    const color = isGood ? colors[1] : isBad ? colors[0] : colors[2];
+                                    return (
+                                        <div key={taxon} className="taxa-card">
+                                            <div className="taxa-name">{taxon}</div>
+                                            <div className="taxa-abundance">Abundance: {relativeAbundance.toFixed(2)}%</div>
+                                            <div className="bar-container">
+                                                <div 
+                                                    className="bar" 
+                                                    style={{
+                                                        width: `${relativeAbundance}%`,
+                                                        background: color
+                                                    }}
+                                                />
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                            {data.taxa.length > taxaPerPage && (
+                                <div className="scroll-buttons">
+                                    <button className="button" onClick={handlePrevPage} disabled={currentPage === 0}>
+                                        Previous
+                                    </button>
+                                    <button className="button" onClick={handleNextPage} disabled={endIndex >= data.taxa.length}>
+                                        Next
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                    {metrics && !loading && (
+                        <div className="card">
+                            <h2>Diversity Metrics</h2>
+                            <div className="metric-grid">
+                                {Object.entries(metrics).map(([key, value]) => (
+                                    <div key={key} className="metric-card">
+                                        <div className="metric-header">{key.charAt(0).toUpperCase() + key.slice(1)}</div>
+                                        <div className="metric-value">
+                                            {typeof value === 'number' ? value.toFixed(3) : value}
+                                        </div>
+                                        <div className="metric-description">
+                                            {metricDescriptions[key]}
+                                        </div>
+                                        <div className="bar-container">
+                                            <div 
+                                                className="bar" 
+                                                style={{
+                                                    width: `${(value / Object.values(metrics).reduce((max, curr) => 
+                                                        Math.max(max, curr), 0)) * 100}%`,
+                                                    background: '#3498db'
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        const { useState } = React;
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<MyelinBio />);
+    </script>
+</body>
+</html>
