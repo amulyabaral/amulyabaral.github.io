@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🦮 Article Hound</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+    body {
+      font-family: 'Inter Var', 'Inter', Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #fetchButton {
+      display: block;
+      margin: 0 auto;
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: 500;
+      color: white;
+      background-color: #007aff;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #fetchButton:hover {
+      background-color: #0056b3;
+    }
+
+    #tabs {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #007aff;
+      background-color: #e9f5ff;
+      border: 2px solid #007aff;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .tab.active {
+      background-color: #007aff;
+      color: white;
+    }
+
+    #loading {
+      text-align: center;
+      margin: 20px 0;
+      font-size: 1rem;
+      color: #555;
+      display: none;
+    }
+
+    #loading .spinner {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border: 4px solid #007aff;
+      border-top: 4px solid transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    #loading-message {
+      margin-top: 10px;
+    }
+
+    #articles {
+      margin-top: 20px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .article {
+      background: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+
+    .article h3 {
+      font-size: 1.25rem;
+      margin: 0 0 10px;
+    }
+
+    .article p {
+      margin: 5px 0;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .article a {
+      color: #007aff;
+      text-decoration: none;
+    }
+
+    .article a:hover {
+      text-decoration: underline;
+    }
+
+    .no-results {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #777;
+    }
+
+    /* Ticker Styles */
+    #ticker {
+      position: fixed;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      background-color: #007aff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-size: 1rem;
+      font-weight: 500;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <h1>🦮 Article Hound</h1>
+  <div id="tabs">
+    <div class="tab active" data-category="amr">🦠 AMR & Metagenomics</div>
+    <div class="tab" data-category="neuro">🧠 Neuroimmunology</div>
+  </div>
+  <button id="fetchButton">Fetch Articles</button>
+  <div id="loading">
+    <div class="spinner"></div>
+    <div id="loading-message">Fetching articles...</div>
+  </div>
+  <div id="articles"></div>
+  <div id="ticker">Fetched: 0 articles</div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const fetchButton = document.getElementById('fetchButton');
+    const loadingElement = document.getElementById('loading');
+    const loadingMessage = document.getElementById('loading-message');
+    const articlesContainer = document.getElementById('articles');
+    const ticker = document.getElementById('ticker');
+
+    let activeCategory = 'amr';
+    let jokes = [
+      "Sniffing out the data...",
+      "Tracking the freshest articles...",
+      "Fetching like a good hound...",
+      "Tails wagging, data incoming...",
+      "Nose to the ground, finding papers...",
+      "Barking up the right tree for articles...",
+      "Hounding for science...",
+      "Fetching knowledge, one paw at a time...",
+      "Good boy! Fetching more articles...",
+      "Who let the data out? Fetching it back!",
+      "Hunting for hidden gems in the data woods...",
+      "Woof! Just a moment, finding science treats...",
+      "Sniff sniff... I smell some interesting papers...",
+      "Data fetched and ready to wag... almost!",
+      "Hold tight! The hound is chasing down the best...",
+      "Zooming through data fields... stay tuned!",
+      "Good dog at work! Science loading...",
+      "No bones about it, fetching your data...",
+      "Wagging tail means data is on the way...",
+      "Hot on the trail of scientific breakthroughs..."
+    ];
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        activeCategory = tab.dataset.category;
+        articlesContainer.innerHTML = '';
+        ticker.textContent = 'Fetched: 0 articles'; // Reset ticker on tab change
+      });
+    });
+
+    async function fetchArticles() {
+      loadingElement.style.display = 'block';
+      articlesContainer.innerHTML = '';
+      ticker.textContent = 'Fetched: 0 articles'; // Reset ticker on fetch
+
+      let jokeIndex = 0;
+      const jokeInterval = setInterval(() => {
+        loadingMessage.textContent = jokes[jokeIndex % jokes.length];
+        jokeIndex++;
+      }, 2000);
+
+      try {
+        const endDate = new Date();
+        const startDate = new Date();
+        startDate.setDate(endDate.getDate() - 7);
+
+        const startStr = startDate.toISOString().split('T')[0];
+        const endStr = endDate.toISOString().split('T')[0];
+
+        let cursor = 0;
+        let hasMore = true;
+        let fetchedCount = 0;
+
+        const keywords = activeCategory === 'amr' 
+          ? ["AMR", "antimicrobial resistance", "metagenomics", "microbiome", "genomics", "antibiotic resistance"] 
+          : ["neuroimmunology", "neuro", "immunology", "brain", "inflammation", "neuroinflammation"];
+
+        while (hasMore) {
+          const response = await fetch(`https://api.biorxiv.org/details/biorxiv/${startStr}/${endStr}/${cursor}`);
+          const data = await response.json();
+
+          if (data.collection.length > 0) {
+            const filtered = data.collection.filter(article => {
+              const combinedText = `${article.title} ${article.abstract || ''}`.toLowerCase();
+              return keywords.some(keyword => combinedText.includes(keyword.toLowerCase()));
+            });
+
+            fetchedCount += filtered.length;
+            cursor += data.collection.length;
+
+            // Update ticker
+            ticker.textContent = `Fetched: ${fetchedCount} articles`;
+
+            // Display articles immediately
+            filtered.forEach(article => {
+              const articleDiv = document.createElement('div');
+              articleDiv.className = 'article';
+              articleDiv.innerHTML = `
+                <h3>${article.title}</h3>
+                <p><strong>Authors:</strong> ${article.authors}</p>
+                <p><strong>DOI:</strong> <a href="https://doi.org/${article.doi}" target="_blank">${article.doi}</a></p>
+                <p><strong>Publication Date:</strong> ${article.date}</p>
+              `;
+              articlesContainer.appendChild(articleDiv);
+            });
+          } else {
+            hasMore = false;
+          }
+        }
+
+        clearInterval(jokeInterval);
+
+        if (fetchedCount === 0) {
+          articlesContainer.innerHTML = '<p class="no-results">No relevant articles found for this week.</p>';
+        }
+      } catch (error) {
+        clearInterval(jokeInterval);
+        articlesContainer.innerHTML = '<p class="no-results">Error fetching articles. Please try again later.</p>';
+      } finally {
+        loadingElement.style.display = 'none';
+      }
+    }
+
+    fetchButton.addEventListener('click', fetchArticles);
+  </script>
+</body>
+</html>
