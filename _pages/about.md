@@ -14,8 +14,7 @@ I'm a final year PhD student at NMBU working on antimicrobial resistance using l
       <li>Bacteria are cool, but antimicrobial resistance sucks for us humans.</li>
       <li>Computers are cool.</li> 
 </details>
-
-
+<br/>
 <details>
 <summary>What my PhD is about</summary>
 <br/>
