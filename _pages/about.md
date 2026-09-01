@@ -36,7 +36,7 @@ A feed additive called Bovaer makes cattle burp out (and fart) less methane, so 
 <br/>
 <b>4. How could the Nordic countries track resistance together?</b>
 <br/>
-Each Nordic country tracks resistance and antibiotic use in its own way, and humans, animals, food and the environment are usually tracked separately. That makes it hard to compare countries or spot a problem early, before it crosses a border. I was very lucky to be a part of the NoMoreAMR project. We mapped every surveillance system in the Nordics into one open website ([nomoreamr.org](https://nomoreamr.org){:target="_blank"}) and wrote a roadmap for tying them together. It's doable, but it needs connected data systems and clear rules for sharing data across borders. ([Published in Public Health, 2026](https://doi.org/10.1016/j.puhe.2026.106285){:target="_blank"})
+Each Nordic country tracks resistance and antibiotic use in its own way, and humans, animals, food and the environment are usually tracked separately. That makes it hard to compare countries or spot a problem early, before it crosses a border. I was very lucky to be a part of the NoMoreAMR project. We mapped every surveillance system in the Nordics into one open website <a href="https://nomoreamr.org" target="_blank">nomoreamr.org</a> and wrote a roadmap for tying them together. It's doable, but it needs connected data systems and clear rules for sharing data across borders. <a href="https://doi.org/10.1016/j.puhe.2026.106285" target="_blank">(Paper published in Public Health, 2026)</a>
 </details>
 
 <br/>
