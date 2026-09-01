@@ -47,12 +47,14 @@ Things I have worked on outside of my regular job:
 
 I also like to:
 <details> <summary> Run marathons </summary>
+
 <img src="/images/oslo-marathon.jpg" alt="Oslo Marathon">
 </details>
 <details> <summary> Go bikepacking </summary>
 My latest trip was from Ålesund to Trondheim (about 500km) along the west coast of Norway in July 2026.
 </details>
 <details><summary> Wear the same clothes everyday </summary>
+Well, not the exact same pair, but I have 10 of the same t-shirt, 3 of the same sweater, and 2 of the same pants and that's pretty much 90% of the clothing I own. The term is 'onebag minimalist'. It's amazing! I've travelled for weeks at an end with just a "free personal item" bag without sacrificing on comfort. I keep a database of what, when and why I bought something (other than consumables like detergent, food, etc). It really helps in being more mindful of consumerism and make the most of things you already own. Started doing it from 2022 after being inspired by ([jeremy maluf's indefinite backpack travel setup]("https://jeremymaluf.com/onebag/)).
 </details>
 <details> <summary> Make "good" coffee </summary>
 Not sure how I got into coffee, but I ended up buying a flat burr electric grinder when I lived in Denmark for 3 months in 2025. Took it back with me to Norway. After some experimenting, sold the electric grinder and have settled on a manual grinder - the Kingrinder K6, and use an Aeropress Go for most brews. Have a monthly coffee subscription to try different beans (it's a surprise every month!). If I had to pick a favourite, it would be washed Kenyan light roasts.
