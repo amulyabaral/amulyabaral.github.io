@@ -15,7 +15,6 @@ I'm a final year PhD student at NMBU working on antimicrobial resistance using l
       <li>Computers are cool.</li> <br/>
 </details>
 
-
 <details>
 <summary>What my PhD is about</summary>
 <b>In short: Antibiotic use and resistance in Norwegian cattle.</b>
