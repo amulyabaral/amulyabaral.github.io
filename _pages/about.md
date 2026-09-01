@@ -40,12 +40,12 @@ Each Nordic country tracks resistance and antibiotic use in its own way, and hum
 </details>
 
 <br/>
-
-Things I have worked on:
+Things I have worked on outside of my regular job:
 - [openpathogen.org](https://openpathogen.org){:target="_blank"} — an open source, no-code pathogen profiling platform that runs everything client-side using WASM
-- [panres2](https://panres.rambio.dk){:target="_blank"} — an AMR gene database ontology browser
-- [nomoreamr.org](https://nomoreamr.org){:target="_blank"} — a knowledge base for AMR and AMU surveillance systems in the Nordics
+- [panres2](https://panres.rambio.dk){:target="_blank"} — an AMR gene database ontology browser, made this while on a visit to [Patrick Munk's lab](https://rambio.dk).
+- 
 
 
-You can see I really enjoy this kind of stuff. Sometimes I also likes to run marathons, go bikepacking, and brew light roasts.
+
+You can see I really enjoy this kind of stuff. Sometimes I also like to run marathons, go bikepacking, and brew light roasts.
 
