@@ -46,9 +46,11 @@ Things I have worked on outside of my regular job:
 
 
 I also like to:
-<details> <summary> Run marathons </summary>
-
-<img src="/images/oslo-marathon.jpg" alt="Oslo Marathon">
+<details> <summary> Run (sometimes marathons) </summary> <br/>
+2024 - Stavanger half, Oslo marathon <br/>
+2025 - Göteborg marathon <br/>
+2026 - Folloltrimmen på NMBU 5K <br/>
+<img src="/images/oslo-marathon.jpg" alt="Amulya Baral running at the Oslo Marathon">
 </details>
 <details> <summary> Go bikepacking </summary>
 My latest trip was from Ålesund to Trondheim (about 500km) along the west coast of Norway in July 2026.
