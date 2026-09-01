@@ -10,7 +10,7 @@ Hello!<br/>
 I'm a final year PhD student at NMBU working on antimicrobial resistance using large-scale metagenomics.
 
 <details> 
-<summary>Why</summary> <br/>
+<summary>Why</summary>
       <li>Bacteria are cool, but antimicrobial resistance really sucks for us humans.</li>
       <li>Computers are cool.</li> <br/>
 </details>
