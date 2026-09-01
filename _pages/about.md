@@ -46,14 +46,14 @@ Things I have worked on outside of my regular job:
 
 
 I also like to:
-<details> <summary> Run (sometimes marathons) </summary> <br/>
+<details> <summary> Run (sometimes marathons) </summary>
 2024 - Stavanger half, Oslo marathon <br/>
 2025 - Göteborg marathon <br/>
 2026 - Folloltrimmen på NMBU 5K <br/>
 <img src="/images/oslo-marathon.jpg" alt="Amulya Baral running at the Oslo Marathon">
 </details>
 <details> <summary> Go bikepacking </summary>
-My latest trip was from Ålesund to Trondheim (about 500km) along the west coast of Norway in July 2026.
+2026 - Ålesund to Trondheim ~500km, 6 days along the Atlantic Road/Eurovelo with some small detours 
 </details>
 <details><summary> Wear the same clothes everyday </summary>
 Well, not the exact same pair, but I have 10 of the same t-shirt, 3 of the same sweater, and 2 of the same pants and that's pretty much 90% of the clothing I own. The term is 'onebag minimalist'. It's amazing! I've travelled for weeks at an end with just a "free personal item" bag without sacrificing on comfort. I keep a database of what, when and why I bought something (other than consumables like detergent, food, etc). It really helps in being more mindful of consumerism and make the most of things you already own. Started doing it from 2022 after being inspired by ([jeremy maluf's indefinite backpack travel setup]("https://jeremymaluf.com/onebag/)).
