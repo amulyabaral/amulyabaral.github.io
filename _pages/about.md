@@ -15,6 +15,7 @@ I'm a final year PhD student at NMBU working on antimicrobial resistance using l
       <li>Computers are cool.</li> 
 </details>
 
+
 <details>
 <summary>What my PhD is about</summary>
 <br/>
@@ -23,11 +24,12 @@ I'm a final year PhD student at NMBU working on antimicrobial resistance using l
 
 About 80% of all antibiotics produced in the world is actually used in animals. We've known for a while that antibiotic use in animals drives resistance and they eventually come around to affecting humans by making infections (in both animals and humans) difficult + costly to treat and sometimes even deadly. Norway is an interesting place to study this because farmers here use very little antibiotics — some of the lowest in the world and there are SOTA registries to keep track of all of it. So when resistance genes still show up, I want to know where they come from, why they stick around, whether they can move between bacteria, and how the Nordic countries could keep better track of the whole problem. It has four parts:
 
+
 <b>1. How much antibiotics do Norwegian cattle actually get?</b>
 <br/>
 You can't reduce antibiotic use if you don't know how much is being used in the first place. Norway has a national register of vet prescriptions, but the raw data has been (really really) messy — wrong units, impossible amounts, etc. I've gone through about 1 million prescription records from 2018–2023 (not manually, ofc haha), and built a systematic way to find and fix the errors, and put together the first complete estimate of antibiotic use in Norwegian cattle — including the medicines used for udder infections, which earlier numbers missed because their data quality was so bad.
 <br/>
-<b> 2. Which resistance genes live in cattle guts, and can they move? <b>
+<b> 2. Which resistance genes live in cattle guts, and can they move? </b>
 <br/>
 Norwegian cattle get hardly any antibiotics, yet resistance genes still show up in their guts. If the genes survive without antibiotic pressure, simply using less antibiotics won't make them disappear. And some genes sit on pieces of DNA that can jump between bacteria, so they could spread to the wrong ones later. We (well, technically, a lot of people 5 years before I even started my PhD) sequenced all the bacterial DNA in fecal samples from over 500 animals from 184 farms. I'm using this data to figure out which resistance genes are there, whether they are stuck in place or on mobile bits of DNA that can move  between bacteria, and what actaully matters the most among things like the farm, the animal's age, or a recent antibiotic treatment. I'm also comparing Norwegian cattle with about 1,200 cattle samples from around the world to see where they stand.
 <br/>
