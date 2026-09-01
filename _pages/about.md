@@ -18,7 +18,7 @@ I'm a final year PhD student at NMBU working on antimicrobial resistance using l
 
 In short: Antibiotic resistance in Norwegian cattle. 
 
-Globally, most antibiotics are used in production animals and we've known for a while that antibiotic use drives resistance. Norway is an interesting place to study this because farmers here use very little antibiotics — some of the lowest in the world. So when resistance genes still show up, I want to know where they come from, why they stick around, whether they can move between bacteria, and how the Nordic countries could keep better track of the whole problem. It has four parts:
+Globally, most antibiotics are used in production animals and we've known for a while that antibiotic use in animals drives resistance and they eventually come around to affecting humans by making  infections difficult + costly to treat and sometimes even deadly. Norway is an interesting place to study this because farmers here use very little antibiotics — some of the lowest in the world and there are SOTA registries to keep track of all of it. So when resistance genes still show up, I want to know where they come from, why they stick around, whether they can move between bacteria, and how the Nordic countries could keep better track of the whole problem. It has four parts:
 
 **1. How much antibiotics do Norwegian cattle actually get?**
 
