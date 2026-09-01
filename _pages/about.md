@@ -18,10 +18,8 @@ I'm a final year PhD student at NMBU working on antimicrobial resistance using l
 
 <details>
 <summary>What my PhD is about</summary>
-<br/>
 <b>In short: Antibiotic use and resistance in Norwegian cattle.</b>
-
-
+<br/>
 About 80% of all antibiotics produced in the world is actually used in animals. We've known for a while that antibiotic use in animals drives resistance and they eventually come around to affecting humans by making infections (in both animals and humans) difficult + costly to treat and sometimes even deadly. Norway is an interesting place to study this because farmers here use very little antibiotics — some of the lowest in the world and there are SOTA registries to keep track of all of it. So when resistance genes still show up, I want to know where they come from, why they stick around, whether they can move between bacteria, and how the Nordic countries could keep better track of the whole problem. It has four parts:
 <br/>
 <b>1. How much antibiotics do Norwegian cattle actually get?</b>
