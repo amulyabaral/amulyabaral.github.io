@@ -20,7 +20,7 @@ I'm a final year PhD student at NMBU working on antimicrobial resistance using l
 <summary>What my PhD is about</summary>
 <b>In short: Antibiotic use and resistance in Norwegian cattle.</b>
 <br/>
-About 80% of all antibiotics produced in the world is actually used in animals. We've known for a while that antibiotic use in animals drives resistance and they eventually come around to affecting humans by making infections (in both animals and humans) difficult + costly to treat and sometimes even deadly. Norway is an interesting place to study this because farmers here use very little antibiotics — some of the lowest in the world and there are SOTA registries to keep track of all of it. So when resistance genes still show up, I want to know where they come from, why they stick around, whether they can move between bacteria, and how the Nordic countries could keep better track of the whole problem. It has four parts:
+About 80% of all antibiotics produced in the world is actually used in animals. We've known for a while that antibiotic use in animals drives resistance and they eventually come around to affecting humans by making infections (in both animals and humans) difficult + costly to treat and sometimes even deadly. Norway is an interesting place to study this because farmers here use very little antibiotics (one of the lowest in the world) and there are excellent registries that keep very good track of it all. So when resistance genes still show up, I want to know where they come from, why they stick around, whether they can move between bacteria, and how the Nordic countries could keep better track of the whole problem. It has four parts:
 <br/>
 <b>1. How much antibiotics do Norwegian cattle actually get?</b>
 <br/>
@@ -43,9 +43,12 @@ Each Nordic country tracks resistance and antibiotic use in its own way, and hum
 Things I have worked on outside of my regular job:
 - [openpathogen.org](https://openpathogen.org){:target="_blank"} — an open source, no-code pathogen profiling platform that runs everything client-side using WASM
 - [panres2](https://panres.rambio.dk){:target="_blank"} — an AMR gene database ontology browser, made this while on a visit to [Patrick Munk's lab](https://rambio.dk).
-- 
 
 
-
-You can see I really enjoy this kind of stuff. Sometimes I also like to run marathons, go bikepacking, and brew light roasts.
+I also like to:
+Run marathons
+Go bikepacking
+Wear the same clothes everyday
+Make "good" coffee
+"budget audiophile" hardware as well.
 
