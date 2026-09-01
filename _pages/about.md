@@ -41,14 +41,20 @@ Each Nordic country tracks resistance and antibiotic use in its own way, and hum
 
 <br/>
 Things I have worked on outside of my regular job:
-- [openpathogen.org](https://openpathogen.org){:target="_blank"} — an open source, no-code pathogen profiling platform that runs everything client-side using WASM
-- [panres2](https://panres.rambio.dk){:target="_blank"} — an AMR gene database ontology browser, made this while on a visit to [Patrick Munk's lab](https://rambio.dk).
+- [openpathogen.org](https://openpathogen.org){:target="_blank"} — an open source, no-code pathogen profiling platform that runs everything client-side using WASM 
+- [panres2](https://panres.rambio.dk){:target="_blank"} — an AMR gene database ontology browser; made it while on a visit to [Patrick Munk's lab](https://rambio.dk) at DTU.
 
 
 I also like to:
-Run marathons
-Go bikepacking
-Wear the same clothes everyday
-Make "good" coffee
-"budget audiophile" hardware as well.
 
+<details> <summary> Run marathons </summary>
+![Oslo Marathon](images/oslo-marathon.jpg)
+</details>
+<details> <summary> Go bikepacking </summary>
+<details>
+<details><summary> Wear the same clothes everyday </summary>
+<details>
+<details> <summary> Make "good" coffee </summary>
+<details>
+<details> <summary> Try "budget audiophile" hardware </summary>
+<details>
