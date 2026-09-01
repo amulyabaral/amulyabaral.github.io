@@ -46,15 +46,14 @@ Things I have worked on outside of my regular job:
 
 
 I also like to:
-
 <details> <summary> Run marathons </summary>
 ![Oslo Marathon](images/oslo-marathon.jpg)
 </details>
 <details> <summary> Go bikepacking </summary>
-<details>
+</details>
 <details><summary> Wear the same clothes everyday </summary>
-<details>
+</details>
 <details> <summary> Make "good" coffee </summary>
-<details>
+</details>
 <details> <summary> Try "budget audiophile" hardware </summary>
-<details>
+</details>
