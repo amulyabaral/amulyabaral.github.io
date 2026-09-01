@@ -47,7 +47,7 @@ Things I have worked on outside of my regular job:
 
 I also like to:
 <details> <summary> Run marathons </summary>
-![Oslo Marathon](images/oslo-marathon.jpg)
+(images/oslo-marathon.jpg)
 </details>
 <details> <summary> Go bikepacking </summary>
 My latest trip was from Ålesund to Trondheim (about 500km) along the west coast of Norway in July 2026.
