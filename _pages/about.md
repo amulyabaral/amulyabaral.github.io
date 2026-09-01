@@ -49,7 +49,7 @@ I also like to:
 <details> <summary> Run (sometimes marathons) </summary>
 2024 - Stavanger half, Oslo marathon <br/>
 2025 - Göteborg marathon <br/>
-2026 - Folloltrimmen på NMBU 5K <br/>
+2026 - Folloltrimmen på NMBU (5K) <br/>
 <img src="/images/oslo-marathon.jpg" alt="Amulya Baral running at the Oslo Marathon">
 </details>
 <details> <summary> Go bikepacking </summary>
