@@ -40,7 +40,7 @@ Each Nordic country tracks resistance and antibiotic use in its own way, and hum
 
 <br/>
 Outside of my PhD,
-- I made and maintain [openpathogen.org](https://openpathogen.org){:target="_blank"}, an open source, no-code pathogen profiling platform that runs everything client-side using WASM.
+- I made and maintain [openpathogen.org](https://openpathogen.org){:target="_blank"}, an open-source, no-code pathogen profiling platform that runs everything client-side using WASM.
 - I am a board member (communications leader) of SoDoC, a free and non-political interest organization for PhDs, postdocs and temporary research staff at NMBU.
 - Made [panres2](https://panres.rambio.dk){:target="_blank"}, PanRes AMR gene database ontology browser while on a research stay at [Patrick Munk's lab](https://rambio.dk) at DTU.
 
