@@ -12,7 +12,7 @@ site_theme               : "default" # The available themes options are "default
 title                    : "Amulya Baral"
 title_separator          : "-"
 name                     : &name "Amulya Baral"
-description              : &description "Amulya Baral is a PhD student at NMBU, Norway working on antimicrobial resistance using large-scale metagenomics."
+description              : &description "PhD student at NMBU /n Antimicrobial resistance & metagenomics"
 url                      : https://amulya.no
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "amulyabaral/amulyabaral.github.io"
