@@ -47,7 +47,7 @@ Things I have worked on outside of my regular job:
 
 I also like to:
 <details> <summary> Run marathons </summary>
-(images/oslo-marathon.jpg)
+<img src="/images/oslo-marathon.jpg" alt="Oslo Marathon">
 </details>
 <details> <summary> Go bikepacking </summary>
 My latest trip was from Ålesund to Trondheim (about 500km) along the west coast of Norway in July 2026.
@@ -58,5 +58,5 @@ My latest trip was from Ålesund to Trondheim (about 500km) along the west coast
 Not sure how I got into coffee, but I ended up buying a flat burr electric grinder when I lived in Denmark for 3 months in 2025. Took it back with me to Norway. After some experimenting, sold the electric grinder and have settled on a manual grinder - the Kingrinder K6, and use an Aeropress Go for most brews. Have a monthly coffee subscription to try different beans (it's a surprise every month!). If I had to pick a favourite, it would be washed Kenyan light roasts.
 </details>
 <details> <summary> Try "budget audiophile" hardware </summary>
-Bought a pair of Klipsch RP-160M in 2022 because they were on a 80% discount on a store's outlet. It blew my mind despite using a horrible AMP/DAC for a while because I didn't know better (and couldn't afford anything else). Sold them when I moved to Oslo because they were too big. Cut to a few years and 2/3 different other pairs, some DAPs, etc etc later, and I have since settled on a pair of IEMs and just using spotify's lossless tracks on my iphone. I'm still always on a lookout for interesting hardware, and would like to build a proper surround sound setup after buying an apartment.
+Bought a pair of Klipsch RP-160M in 2022 because they were on ~80% discount on a store's outlet. It blew my mind despite using a horrible AMP/DAC for a while because I didn't know better (and couldn't afford anything else). Sold them when I moved to Oslo because they were too big. Cut to a few years and 2/3 different other pairs, some DAPs, etc etc later, and I have since settled on a pair of IEMs and just using spotify's lossless tracks on my iphone. I'm still always on a lookout for interesting hardware, and would like to build a proper surround sound setup after buying an apartment.
 </details>
