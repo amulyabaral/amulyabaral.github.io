@@ -10,9 +10,9 @@ Hello!<br/>
 I'm a final year PhD student at NMBU working on antimicrobial resistance using large-scale metagenomics.
 
 <details> 
-<summary>Why I'm doing it</summary>
+<summary>Why I'm doing it</summary> <br/>
       <li>Bacteria are cool, but antimicrobial resistance sucks for us humans.</li>
-      <li>Computers are cool.</li> 
+      <li>Computers are cool.</li> <br/>
 </details>
 
 
@@ -40,7 +40,7 @@ Each Nordic country tracks resistance and antibiotic use in its own way, and hum
 </details>
 
 <br/>
-Things I have worked on outside of my regular job:
+Things I have worked on outside of my PhD:
 - [openpathogen.org](https://openpathogen.org){:target="_blank"} — an open source, no-code pathogen profiling platform that runs everything client-side using WASM 
 - [panres2](https://panres.rambio.dk){:target="_blank"} — an AMR gene database ontology browser; made it while on a visit to [Patrick Munk's lab](https://rambio.dk) at DTU.
 
