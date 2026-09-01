@@ -47,7 +47,7 @@ Alongside it,
 
 I also like to:
 <details> <summary> Run (sometimes marathons) </summary>
-I am quite the slow runner right now; ideally would like to run a full marathon under 3 hours some day in the near future. Some stats:<br/>
+I am quite the tortoise right now; ideally would like to run a full marathon under 3 hours some day in the near future. Some stats:<br/>
 5K - 22:26 <br/>
 10K - 47:30 <br/>
 Half-marathon - 1:41:10 <br/>
