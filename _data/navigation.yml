@@ -7,9 +7,11 @@
 main:
   - title: "About me"
     url: /
+  
+  - title: "Blog"
+    url: /year-archive/
 
   - title: "Portfolio"
     url: /portfolio/
 
-  - title: "Blog"
-    url: /year-archive/
+
