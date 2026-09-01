@@ -24,7 +24,7 @@ Globally, most antibiotics are used in production animals and we've known for a 
 <br/>
 <b>1. How much antibiotics do Norwegian cattle actually get?</b>
 <br/>
-You can't reduce antibiotic use if you don't know how much is being used in the first place. Norway has a national register of vet prescriptions, but the raw data has been (really really) messy — wrong units, impossible amounts, etc. I've gone through (not manually haha) about 1 million prescription records from 2018–2023, and built a systematic way to find and fix the errors, and put together the first complete estimate of antibiotic use in Norwegian cattle — including the medicines used for udder infections, which earlier numbers missed because their data quality was so bad.
+You can't reduce antibiotic use if you don't know how much is being used in the first place. Norway has a national register of vet prescriptions, but the raw data has been (really really) messy — wrong units, impossible amounts, etc. I've gone through about 1 million prescription records from 2018–2023 (not manually, ofc haha), and built a systematic way to find and fix the errors, and put together the first complete estimate of antibiotic use in Norwegian cattle — including the medicines used for udder infections, which earlier numbers missed because their data quality was so bad.
 <br/>
 <b> 2. Which resistance genes live in cattle guts, and can they move? <b>
 <br/>
