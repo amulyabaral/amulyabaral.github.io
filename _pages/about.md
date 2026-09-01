@@ -23,8 +23,7 @@ I'm a final year PhD student at NMBU working on antimicrobial resistance using l
 
 
 About 80% of all antibiotics produced in the world is actually used in animals. We've known for a while that antibiotic use in animals drives resistance and they eventually come around to affecting humans by making infections (in both animals and humans) difficult + costly to treat and sometimes even deadly. Norway is an interesting place to study this because farmers here use very little antibiotics — some of the lowest in the world and there are SOTA registries to keep track of all of it. So when resistance genes still show up, I want to know where they come from, why they stick around, whether they can move between bacteria, and how the Nordic countries could keep better track of the whole problem. It has four parts:
-
-
+<br/>
 <b>1. How much antibiotics do Norwegian cattle actually get?</b>
 <br/>
 You can't reduce antibiotic use if you don't know how much is being used in the first place. Norway has a national register of vet prescriptions, but the raw data has been (really really) messy — wrong units, impossible amounts, etc. I've gone through about 1 million prescription records from 2018–2023 (not manually, ofc haha), and built a systematic way to find and fix the errors, and put together the first complete estimate of antibiotic use in Norwegian cattle — including the medicines used for udder infections, which earlier numbers missed because their data quality was so bad.
