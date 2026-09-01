@@ -41,7 +41,8 @@ A feed additive called Bovaer makes cattle burp out (and fart) less methane, so 
 <br/>
 Each Nordic country tracks resistance and antibiotic use in its own way, and humans, animals, food and the environment are usually tracked separately. That makes it hard to compare countries or spot a problem early, before it crosses a border. I was very lucky to be a part of the NoMoreAMR project. We mapped every surveillance system in the Nordics into one open website ([nomoreamr.org](https://nomoreamr.org){:target="_blank"}) and wrote a roadmap for tying them together. It's doable, but it needs connected data systems and clear rules for sharing data across borders. ([Published in Public Health, 2026](https://doi.org/10.1016/j.puhe.2026.106285){:target="_blank"})
 </details>
-<br/>
+
+
 Things I have worked on:
 - [openpathogen.org](https://openpathogen.org){:target="_blank"} — an open source, no-code pathogen profiling platform that runs everything client-side using WASM
 - [panres2](https://panres.rambio.dk){:target="_blank"} — an AMR gene database ontology browser
