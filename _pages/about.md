@@ -11,7 +11,7 @@ I'm a final year PhD student at NMBU working on antimicrobial resistance using l
 
 <details> 
 <summary>Why</summary> <br/>
-      <li>Bacteria are cool, but antimicrobial resistance sucks for us humans.</li>
+      <li>Bacteria are cool, but antimicrobial resistance really sucks for us humans.</li>
       <li>Computers are cool.</li> <br/>
 </details>
 
