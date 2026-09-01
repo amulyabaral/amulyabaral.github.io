@@ -52,7 +52,7 @@ I am quite the tortoise right now; ideally would like to run a full marathon und
 10K - 47:30 <br/>
 Half-marathon - 1:41:10 <br/>
 Marathon - 3:56:27 <br/>
-Races: <br/>
+<b>Races: </b><br/>
 2024 - Stavanger half, Oslo marathon <br/>
 2025 - Göteborg marathon <br/>
 2026 - Folloltrimmen på NMBU (5K) <br/>
