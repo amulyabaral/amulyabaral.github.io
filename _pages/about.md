@@ -9,13 +9,11 @@ redirect_from:
 Hello!<br/>
 I'm a final year PhD student at NMBU working on antimicrobial resistance using large-scale metagenomics.
 
-Why I'm doing it:
+<summary> Why I'm doing it:
   <ol>
     <li>Bacteria are cool, but antimicrobial resistance sucks for us humans.</li>
     <li>Computers are cool.</li>
-  </ol>
-
-
+  </ol> </summary>
 
 Things I have worked on
 
