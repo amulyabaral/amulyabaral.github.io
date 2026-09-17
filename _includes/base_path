@@ -1,5 +1,11 @@
+{% comment %}
+  base_path is a site-relative prefix, so links and assets keep working no
+  matter which domain the site is served from. absolute_base_path is the full
+  URL, for metadata and links that are followed off-site.
+{% endcomment %}
+{% assign base_path = site.baseurl %}
 {% if site.url %}
-  {% assign base_path = site.url | append: site.baseurl %}
+  {% assign absolute_base_path = site.url | append: site.baseurl %}
 {% else %}
-  {% assign base_path = site.github.url %}
+  {% assign absolute_base_path = site.github.url %}
 {% endif %}
