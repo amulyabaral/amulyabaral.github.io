@@ -13,7 +13,7 @@ title                    : "Amulya Baral"
 title_separator          : "-"
 name                     : &name "Amulya Baral"
 description              : &description ""
-url                      : https://amulya.no
+url                      : https://amulyabaral.github.io
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "amulyabaral/amulyabaral.github.io"
 
