@@ -44,6 +44,11 @@ Alongside it,
 - I am a board member (communications leader) of SoDoC, a free and non-political interest organization for PhDs, postdocs and temporary research staff at NMBU.
 - Made [PanRes AMR gene database ontology browser](https://panres.rambio.dk){:target="_blank"} while on a research stay at [Patrick Munk's lab](https://rambio.dk) at DTU, Copenhagen.
 
+<div class="papers" markdown="1">
+Papers:
+
+{% include papers.md %}
+</div>
 
 I also like to:
 <details> <summary> Run (sometimes marathons) </summary>
