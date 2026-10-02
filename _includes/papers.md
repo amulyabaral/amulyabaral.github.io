@@ -51,9 +51,3 @@ Wrap your name in ** to make it bold. If there's no DOI, delete that line or swa
 - **DOI:** [10.1371/journal.pone.0330754](https://doi.org/10.1371/journal.pone.0330754)
 - **Citation:** Witsø IL, **Baral A**, Llarena AK, Aspholm M, Myrmel M, Wasteson Y. Plastispheres as reservoirs of antimicrobial resistance: Insights from metagenomic analyses across aquatic environments. *PLOS ONE*. 2025;20(9):e0330754.
 - **Contribution:**
-
-#### Quantifying antibiotic use in Norwegian cattle using the VetReg database
-- **Status:** Conference abstract (SVEPM 2025)
-- **Link:** [Abstract (PDF)](https://svepm.org.uk/wp-content/uploads/2025/05/Baral-Quantifying-antibiotic-use-in-Norwegian-cattle-using-the-VetReg-database.pdf)
-- **Citation:** **Baral A**, Llarena AK, Eriksen EØ, Helgesen KO, Smistad M, Wasteson Y, Toftaker I. Quantifying antibiotic use in Norwegian cattle using the VetReg database. Society for Veterinary Epidemiology and Preventive Medicine (SVEPM) annual meeting; 2025.
-- **Contribution:**
