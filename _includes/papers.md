@@ -17,6 +17,11 @@ Wrap your name in ** to make it bold. If there's no DOI, delete that line or swa
 - **Citation:** **Baral A**, Eriksen EØ, Llarena AK, Holmøy IH, Helgesen KO, Smistad M, Wasteson Y, Toftaker I. Estimating antimicrobial use in Norwegian cattle (2018 – 2023): a quality assessment and error-correction approach for veterinary prescription data.
 - **Contribution:**
 
+#### Early-life faecal microbiota in lambs is shaped by time rather than neonatal interventions
+- **Status:** Submitted (under revision)
+- **Citation:** Bjørnevik SV, **Baral A**, Noyes N, Knauer W, Rodriguez-Campos S, Martin AD. Early-life faecal microbiota in lambs is shaped by time rather than neonatal interventions.
+- **Contribution:**
+
 #### PanRes: A database of latent and acquired antimicrobial resistance allowing 3D-based protein homology search
 - **Status:** Preprint
 - **DOI:** [10.64898/2026.06.22.733705](https://doi.org/10.64898/2026.06.22.733705)
