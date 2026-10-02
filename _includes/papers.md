@@ -12,6 +12,11 @@ To add a paper, copy this block to the top of the list and fill it in:
 Wrap your name in ** to make it bold. If there's no DOI, delete that line or swap it for a **Link:** line.
 {% endcomment %}
 
+#### Estimating antimicrobial use in Norwegian cattle (2018 – 2023): a quality assessment and error-correction approach for veterinary prescription data
+- **Status:** Under revision
+- **Citation:** **Baral A**, Eriksen EØ, Llarena AK, Holmøy IH, Helgesen KO, Smistad M, Wasteson Y, Toftaker I. Estimating antimicrobial use in Norwegian cattle (2018 – 2023): a quality assessment and error-correction approach for veterinary prescription data.
+- **Contribution:**
+
 #### PanRes: A database of latent and acquired antimicrobial resistance allowing 3D-based protein homology search
 - **Status:** Preprint
 - **DOI:** [10.64898/2026.06.22.733705](https://doi.org/10.64898/2026.06.22.733705)
