@@ -13,7 +13,7 @@ Wrap your name in ** to make it bold. If there's no DOI, delete that line or swa
 {% endcomment %}
 
 #### Estimating antimicrobial use in Norwegian cattle (2018 – 2023): a quality assessment and error-correction approach for veterinary prescription data
-- **Status:** Under revision
+- **Status:** Submitted (under revision)
 - **Citation:** **Baral A**, Eriksen EØ, Llarena AK, Holmøy IH, Helgesen KO, Smistad M, Wasteson Y, Toftaker I. Estimating antimicrobial use in Norwegian cattle (2018 – 2023): a quality assessment and error-correction approach for veterinary prescription data.
 - **Contribution:**
 
