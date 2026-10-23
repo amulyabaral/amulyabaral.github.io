@@ -288,6 +288,11 @@ defaults:
       layout: talk
       author_profile: true
       share: true
+  # phd/ (final seminar slides): reachable by link only, kept out of sitemap.xml
+  - scope:
+      path: "phd"
+    values:
+      sitemap: false
 
 
 # Sass/SCSS
