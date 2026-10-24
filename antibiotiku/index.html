@@ -16,9 +16,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600..800&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400&display=swap">
 <style>
-/* Layout: plain ground. On wide screens the text runs down a left column while one quiet picture at a time sits
-   on the right and crossfades when a new block of text arrives. On phones and narrow windows the page is a plain
-   article: each picture sits in the text, right under its heading, so nothing scrolls over anything. */
+/* Layout: plain ground, one column. Each picture sits in the text right under its heading and plays once it
+   scrolls into view; on wide screens the pictures run a little wider than the text. */
 :root{
   --bg:#F4F6F3; --surface:#FFFFFF; --ink:#16201D; --ink-2:#44514C; --ink-3:#5E6A65; --line:#DDE3DF; --axis:#B5BFBB;
   --accent:#A8342A; --hl:rgba(242,194,48,.42);
@@ -29,7 +28,6 @@
   --f-body:"Newsreader","Iowan Old Style","Palatino Linotype",Georgia,serif;
   --f-title:"Fraunces","Newsreader","Iowan Old Style",Georgia,serif;
   --f-mono:"IBM Plex Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
-  --col:min(31rem,40vw);
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;
   --bg:#111716; --surface:#19211F; --ink:#E8EEEB; --ink-2:#B7C4BF; --ink-3:#95A29D; --line:#27312E; --axis:#3D4946;
@@ -55,13 +53,12 @@ a:focus-visible,[tabindex]:focus-visible,summary:focus-visible{outline:2px solid
 .progress{position:fixed;left:0;right:0;top:0;z-index:20;padding-top:env(safe-area-inset-top,0px);pointer-events:none}
 .progress span{display:block;height:2px;transform-origin:0 50%;transform:scaleX(var(--p,0));background:var(--accent)}
 
-/* ---------- pictures: in the text on small screens, on a sticky stage on wide ones ---------- */
+/* ---------- pictures ---------- */
 .story{position:relative}
-.stage{display:none}
 .panel{display:grid;place-items:center;width:100%}
 .slot{margin:.2rem 0 .3rem}
-.slot:empty{display:none}
-.fig{width:100%;max-width:620px;margin:0;display:flex;flex-direction:column;gap:.55rem}
+@media (min-width:60rem){.slot{width:calc(100% + 8rem);margin-left:-4rem}}
+.fig{width:100%;max-width:720px;margin:0;display:flex;flex-direction:column;gap:.55rem}
 .fig svg{display:block;width:100%;height:auto;overflow:visible}
 .fig-h{margin:0;font:600 clamp(.95rem,.9rem + .25vw,1.08rem)/1.3 var(--f-display);text-wrap:balance}
 .fig-n{margin:0;font:400 .78rem/1.4 var(--f-display);color:var(--ink-3)}
@@ -73,7 +70,7 @@ a:focus-visible,[tabindex]:focus-visible,summary:focus-visible{outline:2px solid
 
 /* ---------- text ---------- */
 .steps{position:relative;z-index:2;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-top:2.75rem}
-.step{max-width:34rem;margin:0 auto;padding-top:2.6rem}
+.step{max-width:36rem;margin:0 auto;padding-top:2.8rem}
 .step:first-child{padding-top:0}
 .step:last-child{padding-bottom:3.5rem}
 .card{width:100%;display:flex;flex-direction:column;gap:.75rem;hyphens:auto;overflow-wrap:break-word}
@@ -86,19 +83,10 @@ a:focus-visible,[tabindex]:focus-visible,summary:focus-visible{outline:2px solid
 .dek{font-size:clamp(1.04rem,1rem + .4vw,1.28rem);line-height:1.45;color:var(--ink-2)}
 .byline{display:flex;flex-wrap:wrap;gap:.25rem .9rem;font:500 .82rem/1.4 var(--f-display);color:var(--ink-3);border-top:1px solid var(--line);padding-top:.75rem}
 
-@media (min-width:860px) and (min-aspect-ratio:23/20){
-  .stage{display:block;position:sticky;top:env(safe-area-inset-top,0px);height:calc(100svh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));overflow:hidden}
-  .vis{position:absolute;top:10%;bottom:10%;left:calc(max(1.5rem,4vw) + var(--col) + 5vw);right:max(2rem,4vw,env(safe-area-inset-right,0px))}
-  .panel{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility 0s linear .3s}
-  .panel.on{opacity:1;visibility:visible;transition:opacity .45s ease .05s,visibility 0s}
-  .slot{display:none}
-  .fig .maprow{flex-direction:row;align-items:flex-end;gap:1rem}
-  .fig .maprow .normap{width:auto;flex:0 0 auto}
+@media (min-width:60rem){
+  .fig .maprow{flex-direction:row;align-items:flex-end;gap:1.25rem}
+  .fig .maprow .normap{width:auto;height:380px;flex:0 0 auto}
   .mapside{flex:1 1 auto;min-width:0}
-  .steps{pointer-events:none;margin-top:calc(-100svh + env(safe-area-inset-top,0px) + env(safe-area-inset-bottom,0px));padding-top:0;padding-left:max(1.5rem,4vw,env(safe-area-inset-left,0px))}
-  .step,.step:first-child,.step:last-child{max-width:none;margin:0;min-height:100svh;display:flex;align-items:center;padding-block:18svh}
-  .step:last-child{padding-bottom:30svh}
-  .card{pointer-events:auto;width:var(--col);gap:.9rem}
 }
 
 /* ---------- the cow ---------- */
@@ -152,13 +140,12 @@ a:focus-visible,[tabindex]:focus-visible,summary:focus-visible{outline:2px solid
 .c-line{fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .c-dot{stroke:var(--bg);stroke-width:2}
 /* chart marks start hidden or collapsed (.fade/.rise/.pop/.grow, or an inline dash offset / translate) and play once their
-   panel is on, each after its own delay --d. A panel that has played keeps its end state (.done) while it fades out. */
+   panel has scrolled into view (.on), each after its own delay --d. */
 .anim.fade{opacity:0}
 .anim.rise{opacity:0;transform:translateY(6px)}
 .anim.pop{transform-box:fill-box;transform-origin:center;transform:scale(0)}
 .anim.grow{transform:scaleX(0)}
 .panel.on .anim{animation-name:in;animation-duration:var(--dur,.5s);animation-timing-function:var(--ease,cubic-bezier(.2,.7,.2,1));animation-delay:calc(var(--d,0s) + .1s);animation-fill-mode:both}
-.panel.done .anim{opacity:1!important;transform:none!important;stroke-dashoffset:0!important}
 @keyframes in{to{opacity:1;transform:none;stroke-dashoffset:0}}
 @keyframes pop{from{transform:scale(0)}}
 @keyframes fadein{from{opacity:0}}
@@ -199,7 +186,6 @@ details.data h4{margin:1rem 0 .4rem;font:650 .9rem/1.3 var(--f-display);color:va
 @media (max-width:859px){.about-in{grid-template-columns:minmax(0,1fr)}}
 
 @media (prefers-reduced-motion:reduce){
-  .panel,.panel.on{transition-duration:.01s!important;transition-delay:0s!important}
   .panel.on .anim,.panel.on .cowsvg.sick .note-ring,.panel.on .cowsvg.sick .note-line,.panel.on .cowsvg.sick .note-txt{animation-duration:.01s!important;animation-delay:0s!important}
 }
 </style>
@@ -211,9 +197,16 @@ details.data h4{margin:1rem 0 .4rem;font:650 .9rem/1.3 var(--f-display);color:va
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="silCalf" viewBox="117.8 141.1 728.2 644.7"><g transform="translate(0 -152.4)"><g><g><path d="m685.5 900.7 15.9 25.7-51-2.8-2.3-14.7z" fill="currentColor"></path><path d="m685.5 900.7 15.9 25.7-51-2.8-2.3-14.7z" fill="currentColor"></path><path d="m668.5 905.3 15.9 25.7-51-2.8-2.3-14.7z" fill="currentColor"></path><path d="m668.5 905.3 15.9 25.7-51-2.8-2.3-14.7z" fill="currentColor"></path><path d="m723.4 315.9c-31.3 6.5-61.7 29-93.9 19-14.7-0.7-15 9-18.9 16.1 7.2 25.8 35.4 34.2 64.5 41.9 27.8-10.6 54.8-22.1 77-39.1 2.7-23.2-14.6-29.2-28.7-37.9z" fill="currentColor"></path><path d="m157.6 457.7c-13.5 8.6-15.5 32.4-11.2 64.3 0.3 1.9-0.6 4.2 0.8 5.8 22.3 26.4 37.1 56.4 19.2 85.2l14.4-2.6c6.8 14.1-0.9 28.2-6.4 42.2l34.5-39.6-10.4-73.4z" fill="currentColor"></path><path d="m354 600c-48.9 47.2-87.7 96.8-105.9 151.3-0.7 2.2-1.4 4.5-2.1 6.7-15.3 46.2-26 106.7 5.4 139.7l-34.5 18.2c-7-16.8-16.6-30.9-32.1-39 9.4-57.4 4.4-114.8 4-172.2l132.3-126.1 32.1 14.3z" fill="currentColor"></path><path d="m693.9 526.6c-21.4 51.7-51.7 90.2-56.4 133.9-0.2 1.9-0.5 3.9-0.7 5.8-2.3 23.7 0.7 50 12.4 80.6 1.2 3.1 0.6 6.6-0.3 9.7-9.8 34.3-20.7 63 6.3 109.3 1 1.6 1.1 3.8 3 5 15.4 9.4 32.6 19.8 27.7 36.6l-45.7-0.6-66.5-245.7 89-135.8z" fill="currentColor"></path><path d="m696.3 324.8c30.2 5.5 12-8.4 44.8-6.5-1.3 12.1 33.6 19.2 39.3 29.7 6.6 17.7 20.5 31.6 29.3 57.7l1.3 9.6c-2.1 23.1 1.5 44.5 8 65 16.7 27.2 21.2 41.3 17.6 46.8-4.6 10.9-11.5 20.7-25.7 27.3-10.2 1.7-20.8 1.3-32.1-1.3-27.4-7.7-52.4-22.5-78.6-33.8-34.7 28.2-69.3 57.2-94.6 126.1-1.1 35.3 14.1 63.3 23.7 93.8l0.7 2.7c-0.8 12.6-1.7 25-7.8 37.8-0.7 1.4-0.4 3-0.5 4.5-3.7 35.7 2.4 68.2 23.8 95.8 0.8 1.1 1.1 2.6 2.5 3.2 13.5 5.3 18.9 13.5 23.4 22.2l-40.1 11.7c-13.3-10.4-22.7-26-41.7-28.6-6.5-43.4-6.5-86.8-32-130.3l-0.6-2.3c-0.9-21.8 1.8-43.2-5.9-65.6-0.3-0.8-0.1-1.8-0.8-2.4-11.8-9.2-13-18.6-16.9-28.3l-22.9-7.7-2.8-1c-71-0.1-135.6-11.1-177.9-60.2-29.8 43.4-82.6 69.2-111.5 109.5-1 1.3-1.9 2.7-2.8 4-10.3 14.9-19 30.5-25.8 46.9-0.5 1.2-1.2 2.4-1.5 3.7-11.3 43.4-17.2 91.1-4.3 147.8l-30.5 14.3-11.4-22.4-1.1-2.1c5.2-13.7-8.5-19.8-14.7-28.8 13.4-58.5 15-118.3 4.8-179.4 2.6-2.3 3.7-15.2 40-36.2 1.3-0.8 1.9-2.1 2.9-3.2 6.5-7.4 13.3-16 20.4-25.9 0.7-0.9 0.6-2 0.9-3.1 4.3-15.1 4.1-31 0.4-47.7-0.2-0.8 0.1-1.7-0.5-2.3-27.6-27.8-38.1-57.5-44.9-88.3-0.2-58.9 59.7-86.2 115.4-115.7 64.1-8.4 107.6 10.7 152 28.4l3.2 0.6c23.7 8.1 47.6 17.4 69.3 12.9 100-18.5 176.8-29.5 199.2-77.3 12.5-10.8-18.3-10 6.8-2z" fill="currentColor"></path><path d="m354.8 375.7-24.9-3.2-29.7-0.6s12 9.7 8 9.7h-30.5l-21.6 5.8-3.2 3.9-4.8 14.9-12 3.9s-14.4 1.3-12.8 5.8c1.6 4.5 7.2 18.8 7.2 18.8l-9.6 9.1-10.4 7.1-12.8 7.8 16.8 13-1.6 12.3-5.6 11.7-2.4 6.5-9.6 8.4 12.8 18.8 6.4 7.8s-0.8 5.2-0.8 9.1c0 3.9 4 7.8 4 7.8l0.8 12.3 12.8 5.8 13.6-6.5 18.4-6.5 7.2-13s8 0 9.6-3.2c1.6-3.2 4-9.7 2.4-13.6-1.6-3.9-12-8.4-7.2-9.7 4.8-1.3 16-3.9 16-3.9s8.8-7.8 8-11c-0.8-3.2-3.2-6.5-8.8-11-5.6-4.5-17.6-11-20-14.9-2.4-3.9-7.2-9.7-7.2-9.7s-4.8-12.3-1.6-15.6c3.2-3.2 7.2-13.6 7.2-16.2 0-2.6 8.8-8.4 8.8-8.4l23.2 7.1 14.4 20.8 11.2 13 6.4 18.8-0.8 9.1 28.1 1.9 13.6 11.7s-8 14.3-9.6 16.9c-1.6 2.6-13.6 14.9-13.6 14.9l-8.8 12.3 11.2 15.6 16 11.7 12.8-1.3 17.6-9.7 5.6-1.9 18.4 10.4 3.2 4.5 23.2-6.5 12.8 1.9 20-10.4 3.2-13.6-5.6-3.2 16.8 13.6v18.8l4.8 7.8 18.4 5.8 10.4 10.4 28.9 5.2v10.4l3.2 5.8 6.4 7.1 7.2-1.9 14.4-14.3 1.6-15.6 6.4-11s-3.2-15.6-3.2-18.2c0-2.6-3.2-13-3.2-13s-3.2-7.8 4-9.7c7.2-1.9 18.4-5.8 18.4-5.8l20.8-7.1 6.4-1.3 9.6-0.6 1.6-7.1s-9.6-9.7-10.4-13c-0.8-3.2-5.6-11.7-6.4-14.3-0.8-2.6-16-7.8-19.2-9.7-3.2-1.9-12.8-7.8-12.8-7.8s-4.8-6.5-4.8-9.1 4.8-9.1 4.8-9.1 4-7.8 4-12.3c0-4.5-1.6-16.2-1.6-16.2v-9.1l5.6-3.2 6.4 3.2 8.8 6.5 1.6 6.5 14.4 1.9s-3.2-13.6-4.8-18.2c-1.6-4.5-6.4-15.6-6.4-15.6v-7.8l5.6-2.6 9.6 10.4 13.6 13.6 0.8 13.6 7.2 11 0.8 10.4 4.8 8.4 3.2 4.5 9.6-6.5s2.4-3.9 2.4-7.8 0.8-13-0.8-15.6c-1.6-2.6-4-5.8-7.2-12.3-3.2-6.5-5.6-11-8.8-14.3-3.2-3.2-7.2-10.4-7.2-13.6 0-3.2 0.8-7.8 0-10.4-0.8-2.6-3.2-5.2-3.2-8.4 0-3.2 0.8-10.4 0.8-10.4s-0.8-2.6-0.8-5.2c0-2.6-0.8-9.1-0.8-9.1l-11.2-5.8c-41.9 22.2-93.4 40.6-165.1 50.7l-16.8 6.5s-13.6-2.6-16.8-3.9c-3.2-1.3-14.4-6.5-17.6-7.8-3.2-1.3-15.2-1.3-20.8-1.9-5.6-0.6-17.6-3.2-23.2-7.1-5.6-3.9-9.6-5.2-12.8-5.2-3.2 0-15.2-5.8-15.2-5.8z" fill="currentColor"></path><path d="m701.1 345.2 0.8 13 1.6 13 8.8 9.1 11.2 4.5 7.2 0.6 6.4 4.5s4 9.1 3.2 11.7c-0.8 2.6-0.8 12.3-0.8 12.3l8 5.2 7.2 2.6 7.2 9.7s0.8 13 0.8 15.6c0 2.6-0.8 8.4-0.8 11.7 0 3.2-0.8 14.3-0.8 14.3l3.2 9.1-8.8-1.9h-7.2l-4 3.9-4.8 3.2s-4 0.6-7.2-0.6c-3.2-1.3-5.6-1.9-13.6-6.5-8-4.5-14.4-12.3-14.4-12.3s-4.8-4.5-4-7.1c0.8-2.6-3.2-8.4-4-11-0.8-2.6-3.2-5.8-3.2-10.4 0-4.5 0-5.8-2.4-9.1s-4-2.6-4-7.8 2.4-7.8-4.8-11c-7.2-3.2-10.4-9.1-10.4-9.1s0.8-9.1 4-11c3.2-1.9 6.4-1.9 6.4-4.5s1.6-11 1.6-11-0.8-1.3 0-4.5c0.8-3.2 11.2-18.2 11.2-18.2z" fill="currentColor"></path><path d="m708.3 423.4c17.3-1.8 30.9 1.4 41.3 9.1l-0.2 4.4c-15.2 1.8-29.8 1.5-41.9-7.8z" fill="currentColor"></path><path d="m693.2 327.7c-28 15.4-50.4 46-84.1 45.9-14.3 3.7-11.7 13-13.3 21 14.5 22.5 43.9 22.2 74 21 23.4-18.3 45.9-37.3 62-60.1-4.3-23-22.6-23.5-38.6-27.8z" fill="currentColor"></path><path d="m546.7 419.2-9.6-12.5-5-13.2-2.5-7.9s-2.5-6.1-2.5-8.6-0.4-6.8-0.4-8.2-1.4-9.3-1.4-9.3l6.1 12.5 0.7 6.1s2.1 7.9 4.3 9.6c2.1 1.8 5.4 6.1 5.4 6.1s0.4 6.1 1.1 7.5c0.7 1.4 3.6 5.4 3.9 7.1 0.4 1.8 2.1 7.1 2.1 7.1z" transform="matrix(-.00022477 -1.6 1.3 -.00018223 163.5 1232.9)" fill="currentColor"></path><path d="m821.6 486.7c-27.1 5.9-40.1 25-53.7 43.5 11.1 9.9 17.3 26.7 36.1 25.7l0.8 2.6c15.8-9 31.8-17.9 34.1-32.8 0.7-13.5-7.4-26.3-17.2-39z" fill="currentColor"></path><path d="m633 558 8.3 12.1-9.8-1.8z" transform="matrix(1.6 0 0 1.3 -205.6 -195.3)" fill="currentColor"></path><path d="m331.8 603.5-1.5 1.8 13.1 7.2 0.5 5.6c-30.8 36.7-55.3 75.2-66.7 117.5-0.5 1.7-0.9 3.5-1.3 5.2-9.6 35.9-16.4 82.9 3.4 108.6l-15.4 10.1c0.8 2 1.6 4.1 2.3 6.2l21.7-14.1c-19.8-25.7-13-72.7-3.4-108.6 0.5-1.7 0.9-3.5 1.3-5.2 11.4-42.3 35.9-80.8 66.8-117.5l-0.5-5.5-20.2-11.1z" transform="matrix(1.6 0 0 1.3 -205.6 -195.3)" fill="currentColor"></path><path d="m549.1 562.8-0.2 0.4 12.1 0.6c-13.5 40.2-32.5 70.1-35.5 104.1-0.1 1.5-0.3 3-0.4 4.5-1.4 18.4 0.5 38.8 7.8 62.6 0.7 2.4 0.4 5.1-0.2 7.6-6.2 26.6-13 49 3.9 84.9 0.6 1.3 0.7 3 1.9 3.8 9.6 7.3 20.5 15.4 17.5 28.3l7.8 0.2c3.1-13-7.7-21.1-17.4-28.4-1.2-0.9-1.3-2.6-1.9-3.8-17-35.9-10.1-58.3-3.9-84.9 0.6-2.5 0.9-5.1 0.2-7.6-7.4-23.8-9.2-44.2-7.8-62.6 0.1-1.5 0.3-3 0.4-4.5 3-34 22-63.9 35.5-104.1l-19.7-1z" transform="matrix(1.6 0 0 1.3 -205.6 -195.3)" fill="currentColor"></path><path d="m708.3 423.4c17.3-1.8 30.9 1.4 41.3 9.1l-0.2 4.4c-15.2 1.8-29.8 1.5-41.9-7.8z" fill="currentColor"></path><path d="m821.6 486.7c-27.1 5.9-40.1 25-53.7 43.5 11.1 9.9 17.3 26.7 36.1 25.7l0.8 2.6c15.8-9 31.8-17.9 34.1-32.8 0.7-13.5-7.4-26.3-17.2-39z" fill="currentColor"></path><path transform="matrix(1.6 0 0 1.3 -205.6 -195.3)" d="m633 558 8.3 12.1-9.8-1.8z" fill="currentColor"></path><path transform="matrix(1.6 0 0 1.3 -205.6 -195.3)" d="m331.8 603.5-1.5 1.8 13.1 7.2 0.5 5.6c-30.8 36.7-55.3 75.2-66.7 117.5-0.5 1.7-0.9 3.5-1.3 5.2-9.6 35.9-16.4 82.9 3.4 108.6l-15.4 10.1c0.8 2 1.6 4.1 2.3 6.2l21.7-14.1c-19.8-25.7-13-72.7-3.4-108.6 0.5-1.7 0.9-3.5 1.3-5.2 11.4-42.3 35.9-80.8 66.8-117.5l-0.5-5.5-20.2-11.1z" fill="currentColor"></path><path transform="matrix(1.6 0 0 1.3 -205.6 -195.3)" d="m549.1 562.8-0.2 0.4 12.1 0.6c-13.5 40.2-32.5 70.1-35.5 104.1-0.1 1.5-0.3 3-0.4 4.5-1.4 18.4 0.5 38.8 7.8 62.6 0.7 2.4 0.4 5.1-0.2 7.6-6.2 26.6-13 49 3.9 84.9 0.6 1.3 0.7 3 1.9 3.8 9.6 7.3 20.5 15.4 17.5 28.3l7.8 0.2c3.1-13-7.7-21.1-17.4-28.4-1.2-0.9-1.3-2.6-1.9-3.8-17-35.9-10.1-58.3-3.9-84.9 0.6-2.5 0.9-5.1 0.2-7.6-7.4-23.8-9.2-44.2-7.8-62.6 0.1-1.5 0.3-3 0.4-4.5 3-34 22-63.9 35.5-104.1l-19.7-1z" fill="currentColor"></path><path d="m184.4 897.9 15.9 25.7-51-2.8-2.3-14.7z" fill="currentColor"></path><path d="m184.4 897.9 15.9 25.7-51-2.8-2.3-14.7z" fill="currentColor"></path><path d="m250.2 897.9 15.9 25.7-51-2.8-2.3-14.7z" fill="currentColor"></path><path d="m250.2 897.9 15.9 25.7-51-2.8-2.3-14.7z" fill="currentColor"></path><path d="m721.9 179.4 1.4 36.2v6.9l25 27.8 20.9 13.9 13.9 7h26.4l1.1-5.2c0.1-1 0.1-2 0.2-3.1l-1.3-9.6c-8.9-26.2-22.8-40.1-29.3-57.7-3.2-6-15.9-10.9-26-16.2h-32.3z" transform="matrix(.79443 0 0 .87016 158.3 179.5)" fill="currentColor"></path></g><path d="m684.2 885.4 15.9 25.7-51-2.8-2.3-14.7z" fill="currentColor"></path><path d="m684.2 885.4 15.9 25.7-51-2.8-2.3-14.7z" fill="currentColor"></path><path d="m667.2 890 15.9 25.7-51-2.8-2.3-14.7z" fill="currentColor"></path><path d="m667.2 890 15.9 25.7-51-2.8-2.3-14.7z" fill="currentColor"></path><path d="m722 300.6c-31.3 6.5-61.7 29-93.9 19-14.7-0.7-15 9-18.9 16.1 7.2 25.8 35.4 34.2 64.5 41.9 27.8-10.6 54.8-22.1 77-39.1 2.7-23.2-14.6-29.2-28.7-37.9z" fill="currentColor"></path><path d="m156.2 442.4c-13.5 8.6-15.5 32.4-11.2 64.3 0.3 1.9-0.6 4.2 0.8 5.8 22.3 26.4 37.1 56.4 19.2 85.2l14.4-2.6c6.8 14.1-0.9 28.2-6.4 42.2l34.5-39.6-10.4-73.4z" fill="currentColor"></path><path d="m352.6 584.7c-48.9 47.2-87.7 96.8-105.9 151.3-0.7 2.2-1.4 4.5-2.1 6.7-15.3 46.2-26 106.7 5.4 139.7l-34.5 18.2c-7-16.8-16.6-30.9-32.1-39 9.4-57.4 4.4-114.8 4-172.2l132.3-126.1 32.1 14.3z" fill="currentColor"></path><path d="m692.5 511.3c-21.4 51.7-51.7 90.2-56.4 133.9-0.2 1.9-0.5 3.9-0.7 5.8-2.3 23.7 0.7 50 12.4 80.6 1.2 3.1 0.6 6.6-0.3 9.7-9.8 34.3-20.7 63 6.3 109.3 1 1.6 1.1 3.8 3 5 15.4 9.4 32.6 19.8 27.7 36.6l-45.7-0.6-66.5-245.7 89-135.8z" fill="currentColor"></path><path d="m694.9 309.5c30.2 5.5 12-8.4 44.8-6.5-1.3 12.1 33.6 19.2 39.3 29.7 6.6 17.7 20.5 31.6 29.3 57.7l1.3 9.6c-2.1 23.1 1.5 44.5 8 65 16.7 27.2 21.2 41.3 17.6 46.8-4.6 10.9-11.5 20.7-25.7 27.3-10.2 1.7-20.8 1.3-32.1-1.3-27.4-7.7-52.4-22.5-78.6-33.8-34.7 28.2-69.3 57.2-94.6 126.1-1.1 35.3 14.1 63.3 23.7 93.8l0.7 2.7c-0.8 12.6-1.7 25-7.8 37.8-0.7 1.4-0.4 3-0.5 4.5-3.7 35.7 2.4 68.2 23.8 95.8 0.8 1.1 1.1 2.6 2.5 3.2 13.5 5.3 18.9 13.5 23.4 22.2l-40.1 11.7c-13.3-10.4-22.7-26-41.7-28.6-6.5-43.4-6.5-86.8-32-130.3l-0.6-2.3c-0.9-21.8 1.8-43.2-5.9-65.6-0.3-0.8-0.1-1.8-0.8-2.4-11.8-9.2-13-18.6-16.9-28.3l-22.9-7.7-2.8-1c-71-0.1-135.6-11.1-177.9-60.2-29.8 43.4-82.6 69.2-111.5 109.5-1 1.3-1.9 2.7-2.8 4-10.3 14.9-19 30.5-25.8 46.9-0.5 1.2-1.2 2.4-1.5 3.7-11.3 43.4-17.2 91.1-4.3 147.8l-30.5 14.3-11.4-22.4-1.1-2.1c5.2-13.7-8.5-19.8-14.7-28.8 13.4-58.5 15-118.3 4.8-179.4 2.6-2.3 3.7-15.2 40-36.2 1.3-0.8 1.9-2.1 2.9-3.2 6.5-7.4 13.3-16 20.4-25.9 0.7-0.9 0.6-2 0.9-3.1 4.3-15.1 4.1-31 0.4-47.7-0.2-0.8 0.1-1.7-0.5-2.3-27.6-27.8-38.1-57.5-44.9-88.3-0.2-58.9 59.7-86.2 115.4-115.7 64.1-8.4 107.6 10.7 152 28.4l3.2 0.6c23.7 8.1 47.6 17.4 69.3 12.9 100-18.5 176.8-29.5 199.2-77.3 12.5-10.8-18.3-10 6.8-2z" fill="currentColor"></path><path d="m353.4 360.4-24.9-3.2-29.7-0.6s12 9.7 8 9.7h-30.5l-21.6 5.8-3.2 3.9-4.8 14.9-12 3.9s-14.4 1.3-12.8 5.8c1.6 4.5 7.2 18.8 7.2 18.8l-9.6 9.1-10.4 7.1-12.8 7.8 16.8 13-1.6 12.3-5.6 11.7-2.4 6.5-9.6 8.4 12.8 18.8 6.4 7.8s-0.8 5.2-0.8 9.1c0 3.9 4 7.8 4 7.8l0.8 12.3 12.8 5.8 13.6-6.5 18.4-6.5 7.2-13s8 0 9.6-3.2c1.6-3.2 4-9.7 2.4-13.6-1.6-3.9-12-8.4-7.2-9.7 4.8-1.3 16-3.9 16-3.9s8.8-7.8 8-11c-0.8-3.2-3.2-6.5-8.8-11-5.6-4.5-17.6-11-20-14.9-2.4-3.9-7.2-9.7-7.2-9.7s-4.8-12.3-1.6-15.6c3.2-3.2 7.2-13.6 7.2-16.2 0-2.6 8.8-8.4 8.8-8.4l23.2 7.1 14.4 20.8 11.2 13 6.4 18.8-0.8 9.1 28.1 1.9 13.6 11.7s-8 14.3-9.6 16.9c-1.6 2.6-13.6 14.9-13.6 14.9l-8.8 12.3 11.2 15.6 16 11.7 12.8-1.3 17.6-9.7 5.6-1.9 18.4 10.4 3.2 4.5 23.2-6.5 12.8 1.9 20-10.4 3.2-13.6-5.6-3.2 16.8 13.6v18.8l4.8 7.8 18.4 5.8 10.4 10.4 28.9 5.2v10.4l3.2 5.8 6.4 7.1 7.2-1.9 14.4-14.3 1.6-15.6 6.4-11s-3.2-15.6-3.2-18.2c0-2.6-3.2-13-3.2-13s-3.2-7.8 4-9.7c7.2-1.9 18.4-5.8 18.4-5.8l20.8-7.1 6.4-1.3 9.6-0.6 1.6-7.1s-9.6-9.7-10.4-13c-0.8-3.2-5.6-11.7-6.4-14.3-0.8-2.6-16-7.8-19.2-9.7-3.2-1.9-12.8-7.8-12.8-7.8s-4.8-6.5-4.8-9.1 4.8-9.1 4.8-9.1 4-7.8 4-12.3c0-4.5-1.6-16.2-1.6-16.2v-9.1l5.6-3.2 6.4 3.2 8.8 6.5 1.6 6.5 14.4 1.9s-3.2-13.6-4.8-18.2c-1.6-4.5-6.4-15.6-6.4-15.6v-7.8l5.6-2.6 9.6 10.4 13.6 13.6 0.8 13.6 7.2 11 0.8 10.4 4.8 8.4 3.2 4.5 9.6-6.5s2.4-3.9 2.4-7.8 0.8-13-0.8-15.6c-1.6-2.6-4-5.8-7.2-12.3-3.2-6.5-5.6-11-8.8-14.3-3.2-3.2-7.2-10.4-7.2-13.6 0-3.2 0.8-7.8 0-10.4-0.8-2.6-3.2-5.2-3.2-8.4 0-3.2 0.8-10.4 0.8-10.4s-0.8-2.6-0.8-5.2c0-2.6-0.8-9.1-0.8-9.1l-11.2-5.8c-41.9 22.2-93.4 40.6-165.1 50.7l-16.8 6.5s-13.6-2.6-16.8-3.9c-3.2-1.3-14.4-6.5-17.6-7.8-3.2-1.3-15.2-1.3-20.8-1.9-5.6-0.6-17.6-3.2-23.2-7.1-5.6-3.9-9.6-5.2-12.8-5.2-3.2 0-15.2-5.8-15.2-5.8z" fill="currentColor"></path><path d="m699.7 329.9 0.8 13 1.6 13 8.8 9.1 11.2 4.5 7.2 0.6 6.4 4.5s4 9.1 3.2 11.7c-0.8 2.6-0.8 12.3-0.8 12.3l8 5.2 7.2 2.6 7.2 9.7s0.8 13 0.8 15.6c0 2.6-0.8 8.4-0.8 11.7 0 3.2-0.8 14.3-0.8 14.3l3.2 9.1-8.8-1.9h-7.2l-4 3.9-4.8 3.2s-4 0.6-7.2-0.6c-3.2-1.3-5.6-1.9-13.6-6.5-8-4.5-14.4-12.3-14.4-12.3s-4.8-4.5-4-7.1c0.8-2.6-3.2-8.4-4-11-0.8-2.6-3.2-5.8-3.2-10.4 0-4.5 0-5.8-2.4-9.1s-4-2.6-4-7.8 2.4-7.8-4.8-11c-7.2-3.2-10.4-9.1-10.4-9.1s0.8-9.1 4-11c3.2-1.9 6.4-1.9 6.4-4.5s1.6-11 1.6-11-0.8-1.3 0-4.5c0.8-3.2 11.2-18.2 11.2-18.2z" fill="currentColor"></path><path d="m697.6 402.8c25.3-2.8 45.3 2.2 60.4 14.2l-0.3 6.8c-22.3 2.9-43.6 2.4-61.3-12.2z" fill="currentColor"></path><path d="m706.9 408.1c17.3-1.8 30.9 1.4 41.3 9.1l-0.2 4.4c-15.2 1.8-29.8 1.5-41.9-7.8z" fill="currentColor"></path><path d="m691.8 312.4c-28 15.4-50.4 46-84.1 45.9-14.3 3.7-11.7 13-13.3 21 14.5 22.5 43.9 22.2 74 21 23.4-18.3 45.9-37.3 62-60.1-4.3-23-22.6-23.5-38.6-27.8z" fill="currentColor"></path><path d="m546.7 419.2-9.6-12.5-5-13.2-2.5-7.9s-2.5-6.1-2.5-8.6-0.4-6.8-0.4-8.2-1.4-9.3-1.4-9.3l6.1 12.5 0.7 6.1s2.1 7.9 4.3 9.6c2.1 1.8 5.4 6.1 5.4 6.1s0.4 6.1 1.1 7.5c0.7 1.4 3.6 5.4 3.9 7.1 0.4 1.8 2.1 7.1 2.1 7.1z" transform="matrix(-.00022477 -1.6 1.3 -.00018223 162.1 1217.6)" fill="currentColor"></path><path d="m820.2 471.4c-27.1 5.9-40.1 25-53.7 43.5 11.1 9.9 17.3 26.7 36.1 25.7l0.8 2.6c15.8-9 31.8-17.9 34.1-32.8 0.7-13.5-7.4-26.3-17.2-39z" fill="currentColor"></path><path d="m633 558 8.3 12.1-9.8-1.8z" transform="matrix(1.6 0 0 1.3 -207 -210.6)" fill="currentColor"></path><path d="m331.8 603.5-1.5 1.8 13.1 7.2 0.5 5.6c-30.8 36.7-55.3 75.2-66.7 117.5-0.5 1.7-0.9 3.5-1.3 5.2-9.6 35.9-16.4 82.9 3.4 108.6l-15.4 10.1c0.8 2 1.6 4.1 2.3 6.2l21.7-14.1c-19.8-25.7-13-72.7-3.4-108.6 0.5-1.7 0.9-3.5 1.3-5.2 11.4-42.3 35.9-80.8 66.8-117.5l-0.5-5.5-20.2-11.1z" transform="matrix(1.6 0 0 1.3 -207 -210.6)" fill="currentColor"></path><path d="m549.1 562.8-0.2 0.4 12.1 0.6c-13.5 40.2-32.5 70.1-35.5 104.1-0.1 1.5-0.3 3-0.4 4.5-1.4 18.4 0.5 38.8 7.8 62.6 0.7 2.4 0.4 5.1-0.2 7.6-6.2 26.6-13 49 3.9 84.9 0.6 1.3 0.7 3 1.9 3.8 9.6 7.3 20.5 15.4 17.5 28.3l7.8 0.2c3.1-13-7.7-21.1-17.4-28.4-1.2-0.9-1.3-2.6-1.9-3.8-17-35.9-10.1-58.3-3.9-84.9 0.6-2.5 0.9-5.1 0.2-7.6-7.4-23.8-9.2-44.2-7.8-62.6 0.1-1.5 0.3-3 0.4-4.5 3-34 22-63.9 35.5-104.1l-19.7-1z" transform="matrix(1.6 0 0 1.3 -207 -210.6)" fill="currentColor"></path><path d="m820.2 471.4c-27.1 5.9-40.1 25-53.7 43.5 11.1 9.9 17.3 26.7 36.1 25.7l0.8 2.6c15.8-9 31.8-17.9 34.1-32.8 0.7-13.5-7.4-26.3-17.2-39z" fill="currentColor"></path><path transform="matrix(1.6 0 0 1.3 -207 -210.6)" d="m633 558 8.3 12.1-9.8-1.8z" fill="currentColor"></path><path transform="matrix(1.6 0 0 1.3 -207 -210.6)" d="m331.8 603.5-1.5 1.8 13.1 7.2 0.5 5.6c-30.8 36.7-55.3 75.2-66.7 117.5-0.5 1.7-0.9 3.5-1.3 5.2-9.6 35.9-16.4 82.9 3.4 108.6l-15.4 10.1c0.8 2 1.6 4.1 2.3 6.2l21.7-14.1c-19.8-25.7-13-72.7-3.4-108.6 0.5-1.7 0.9-3.5 1.3-5.2 11.4-42.3 35.9-80.8 66.8-117.5l-0.5-5.5-20.2-11.1z" fill="currentColor"></path><path transform="matrix(1.6 0 0 1.3 -207 -210.6)" d="m549.1 562.8-0.2 0.4 12.1 0.6c-13.5 40.2-32.5 70.1-35.5 104.1-0.1 1.5-0.3 3-0.4 4.5-1.4 18.4 0.5 38.8 7.8 62.6 0.7 2.4 0.4 5.1-0.2 7.6-6.2 26.6-13 49 3.9 84.9 0.6 1.3 0.7 3 1.9 3.8 9.6 7.3 20.5 15.4 17.5 28.3l7.8 0.2c3.1-13-7.7-21.1-17.4-28.4-1.2-0.9-1.3-2.6-1.9-3.8-17-35.9-10.1-58.3-3.9-84.9 0.6-2.5 0.9-5.1 0.2-7.6-7.4-23.8-9.2-44.2-7.8-62.6 0.1-1.5 0.3-3 0.4-4.5 3-34 22-63.9 35.5-104.1l-19.7-1z" fill="currentColor"></path><path d="m183 882.6 15.9 25.7-51-2.8-2.3-14.7z" fill="currentColor"></path><path d="m183 882.6 15.9 25.7-51-2.8-2.3-14.7z" fill="currentColor"></path><path d="m248.8 882.6 15.9 25.7-51-2.8-2.3-14.7z" fill="currentColor"></path><path d="m248.8 882.6 15.9 25.7-51-2.8-2.3-14.7z" fill="currentColor"></path><path d="m721.9 179.4 1.4 36.2v6.9l25 27.8 20.9 13.9 13.9 7h26.4l1.1-5.2c0.1-1 0.1-2 0.2-3.1l-1.3-9.6c-8.9-26.2-22.8-40.1-29.3-57.7-3.2-6-15.9-10.9-26-16.2h-32.3z" transform="matrix(.79443 0 0 .87016 156.9 164.2)" fill="currentColor"></path></g></g></symbol><symbol id="silBull" viewBox="-15.3 -15 1565.7 867.3"><g transform="translate(0,837) scale(0.1,-0.1)"><path d="M12015 8350 c-559 -90 -512 -84 -830 -105 -609 -40 -1089 -91 -1870 -199 -439 -61 -596 -68 -930 -41 -262 21 -540 19 -700 -4 -71 -11 -191 -29 -265 -40 -217 -32 -404 -42 -595 -32 -104 6 -201 6 -250 0 -44 -5 -165 -13 -270 -18 -167 -8 -207 -13 -332 -45 -177 -44 -351 -101 -553 -178 -379 -146 -577 -208 -817 -253 -76 -14 -173 -35 -216 -47 -54 -14 -92 -19 -124 -14 -56 7 -116 -16 -132 -51 -7 -14 -30 -32 -59 -44 -26 -11 -65 -28 -87 -39 -22 -10 -52 -21 -67 -24 -15 -4 -29 -14 -32 -24 -4 -11 -24 -22 -53 -30 -27 -7 -63 -16 -82 -21 -41 -12 -52 -27 -40 -58 8 -21 2 -28 -54 -68 -70 -51 -221 -198 -430 -418 -108 -113 -158 -158 -212 -189 -132 -77 -267 -237 -376 -445 -35 -67 -53 -89 -105 -129 -88 -66 -170 -191 -229 -346 -10 -27 -19 -48 -20 -48 -1 0 -22 9 -46 19 -63 28 -134 35 -196 18 -37 -10 -57 -11 -70 -3 -26 15 -275 21 -301 7 -15 -8 -23 -7 -32 4 -7 8 -16 15 -20 15 -10 0 -77 -52 -142 -110 l-50 -45 -97 -3 c-97 -3 -416 35 -473 57 -83 32 -483 315 -577 409 -26 26 -65 74 -86 107 -78 118 -147 169 -183 133 -20 -20 -14 -104 11 -166 31 -75 163 -286 246 -392 80 -101 90 -116 70 -105 -33 20 -123 89 -169 130 -62 55 -85 68 -110 60 -38 -12 -26 -70 44 -211 56 -112 75 -141 150 -221 146 -154 348 -303 531 -389 103 -49 335 -134 364 -134 23 0 22 -5 -28 -139 -38 -101 -107 -373 -116 -456 -4 -35 -1 -101 6 -155 24 -175 10 -345 -44 -516 -48 -151 -57 -228 -57 -489 0 -153 -4 -226 -11 -231 -6 -3 -20 -25 -30 -48 -16 -35 -19 -66 -19 -201 0 -183 9 -215 78 -282 67 -65 155 -104 258 -113 55 -5 106 -16 134 -29 64 -30 93 -27 137 13 l38 34 105 -1 c89 -1 113 2 155 21 83 38 123 71 165 139 23 35 49 67 58 70 9 3 60 25 113 49 117 54 179 58 313 19 47 -14 97 -25 111 -25 59 0 313 123 425 206 34 24 156 138 273 253 159 156 222 211 251 221 54 18 131 7 255 -35 58 -19 140 -42 183 -50 82 -15 194 -59 263 -102 25 -16 48 -42 62 -72 13 -25 59 -91 103 -145 56 -70 80 -108 80 -127 0 -15 -15 -67 -34 -115 -63 -164 -79 -229 -74 -302 4 -52 0 -83 -18 -141 -13 -40 -24 -91 -24 -113 0 -57 -34 -151 -96 -260 -59 -105 -95 -154 -220 -298 -46 -52 -111 -133 -146 -180 -61 -82 -67 -87 -164 -135 -55 -27 -112 -58 -127 -68 -17 -11 -36 -15 -51 -11 -30 7 -83 -37 -136 -117 -22 -31 -70 -95 -108 -141 -90 -110 -95 -119 -77 -145 13 -18 13 -26 0 -56 -25 -59 -7 -78 110 -118 62 -21 86 -24 210 -22 190 2 331 24 420 67 91 43 132 78 145 125 5 21 22 54 37 75 27 36 30 37 78 32 132 -14 235 72 235 197 0 38 8 62 34 106 18 31 71 126 116 211 122 228 230 415 334 580 51 80 104 166 120 193 15 26 30 47 34 47 20 0 120 113 195 218 103 146 216 265 315 333 42 29 94 67 115 86 20 18 45 33 55 33 9 0 44 -12 77 -26 33 -14 129 -48 214 -75 304 -97 368 -90 661 73 80 44 178 99 219 122 40 22 86 56 103 74 16 19 30 33 32 31 47 -60 147 -240 209 -377 44 -97 102 -212 129 -254 27 -42 61 -108 75 -145 14 -37 64 -126 111 -197 106 -160 132 -228 178 -453 35 -170 36 -184 30 -316 -5 -110 -3 -143 8 -166 14 -26 13 -33 -29 -122 -34 -74 -51 -98 -76 -111 -42 -22 -82 -62 -127 -123 -20 -27 -54 -72 -77 -100 -79 -94 -93 -148 -51 -190 26 -26 28 -27 301 -51 246 -21 404 -17 462 14 52 27 64 45 120 180 64 154 65 141 -6 215 -34 35 -61 68 -61 73 0 5 9 18 21 28 15 12 20 26 17 47 -6 38 4 37 36 -6 31 -40 46 -43 70 -16 25 27 31 92 16 170 -12 65 -11 72 14 147 14 44 26 86 26 95 0 9 -16 41 -37 70 -50 74 -102 188 -162 362 -97 281 -120 406 -131 702 -6 186 -11 231 -30 290 -21 67 -22 75 -10 172 20 162 -4 351 -61 470 -16 34 -29 71 -29 81 0 23 52 51 145 78 95 27 144 51 220 109 119 91 118 90 509 88 l339 -3 86 -39 c47 -22 126 -56 174 -75 149 -61 257 -121 367 -201 136 -100 180 -122 307 -155 40 -10 41 -11 30 -39 -11 -30 -12 -29 39 -98 14 -19 13 -29 -10 -115 -29 -104 -32 -136 -13 -143 8 -4 12 -33 12 -98 0 -71 6 -109 25 -167 17 -51 26 -68 28 -52 3 18 14 7 59 -63 30 -47 58 -85 63 -85 4 0 20 -18 36 -41 33 -48 41 -40 20 22 l-15 44 20 -24 c18 -22 21 -22 32 -8 11 15 19 11 80 -29 38 -25 71 -52 73 -59 6 -15 77 -55 98 -55 26 0 27 30 1 42 -45 20 -115 157 -115 224 0 14 11 59 25 100 14 41 25 96 25 122 0 61 100 449 141 547 36 87 68 130 199 268 137 144 159 160 566 401 100 59 226 141 280 183 148 112 219 138 263 94 43 -43 41 -185 -3 -291 -24 -56 -26 -74 -21 -130 20 -222 133 -431 315 -586 65 -55 95 -100 173 -254 85 -168 91 -206 83 -531 -10 -429 -30 -574 -111 -816 -35 -104 -232 -526 -267 -572 -10 -13 -18 -36 -18 -52 0 -22 -8 -32 -42 -51 -27 -15 -57 -44 -81 -80 -32 -48 -45 -59 -86 -73 -75 -25 -176 -101 -287 -218 -106 -111 -164 -188 -164 -218 0 -48 107 -88 256 -96 115 -7 205 6 309 44 38 14 105 34 148 44 142 35 207 83 207 153 0 19 7 27 25 32 14 3 30 15 35 25 9 16 14 17 35 7 19 -8 35 -8 65 1 50 15 130 89 130 120 0 13 15 55 34 94 48 102 111 265 211 547 77 216 274 706 426 1055 28 66 60 153 70 194 13 51 33 96 68 150 28 42 57 94 66 115 24 57 29 170 12 236 l-15 55 30 -35 c124 -147 188 -348 188 -596 0 -171 -20 -302 -94 -601 -78 -315 -82 -347 -62 -436 20 -86 51 -145 120 -232 58 -72 72 -107 103 -250 11 -52 27 -95 46 -121 16 -23 39 -79 53 -124 30 -104 45 -122 98 -118 39 2 41 1 56 -37 34 -89 106 -182 162 -211 41 -21 53 -8 77 82 11 38 38 114 61 169 23 55 54 132 70 171 58 142 62 322 7 369 -13 12 -26 28 -30 38 -10 26 -65 55 -119 62 l-50 7 35 37 c49 51 58 74 64 160 l5 76 -51 97 c-28 53 -51 109 -51 123 0 14 15 88 34 163 89 353 123 575 136 887 12 275 22 358 60 490 36 124 54 239 48 303 -6 62 -55 167 -102 219 -19 22 -64 55 -98 73 -35 19 -85 57 -113 85 -27 28 -77 72 -111 97 -159 121 -323 355 -355 506 -17 85 -8 112 168 497 182 395 308 776 362 1096 33 193 43 358 39 681 -2 169 0 304 3 300 24 -29 184 -260 217 -314 91 -148 152 -293 227 -534 154 -495 215 -870 194 -1194 -11 -161 -32 -264 -119 -575 -113 -402 -137 -574 -107 -770 35 -226 183 -551 318 -700 45 -49 156 -135 174 -135 3 0 -5 14 -17 31 -17 23 -20 33 -10 36 10 4 10 8 1 19 -22 27 0 27 36 0 19 -15 35 -25 35 -22 0 3 -22 36 -48 73 -56 78 -134 218 -126 226 3 3 -15 64 -40 137 -25 72 -46 135 -46 138 1 4 16 -22 35 -58 l34 -65 0 45 c0 25 -8 69 -18 98 -10 29 -14 55 -10 58 12 7 11 67 0 98 -7 17 -7 26 1 28 8 3 8 10 -1 25 -6 13 -7 24 -2 27 5 3 -6 43 -26 88 -38 92 -63 184 -63 240 0 20 15 90 34 155 156 542 186 1016 96 1513 -30 166 -104 471 -156 650 -138 468 -336 871 -578 1175 -147 185 -219 303 -237 385 -15 69 -39 117 -101 202 -63 85 -130 146 -233 209 -44 28 -109 71 -145 96 l-65 45 -75 -5 c-41 -3 -167 -15 -280 -27 -167 -18 -243 -21 -410 -17 -192 5 -215 8 -360 42 -197 47 -336 53 -515 25z m-1855 -5706 c-16 -49 -21 -38 -8 16 6 24 13 39 16 32 2 -6 -2 -28 -8 -48z m240 -389 c14 -19 14 -19 -2 -6 -10 7 -18 18 -18 24 0 6 1 8 3 6 1 -2 9 -13 17 -24z" fill="currentColor"></path></g></symbol></svg>
 
 <section class="story">
-  <div class="stage">
-    <div class="vis" id="vis">
+  <div class="steps">
+    <div class="step" data-scene="hero"><header class="card card--title">
+      <h1>Hvor mye antibiotika får norske kyr?</h1>
+      <p class="dek">Hver gang en veterinær behandler et storfe med antibiotika, skal det registreres. Forskere har gått gjennom nesten 700&nbsp;000 slike registreringer, ryddet opp i feilene og regnet seg fram til et svar.</p>
+      <div class="byline"><span>Basert på en studie fra NMBU, Veterinærinstituttet og TINE</span><span>Publisert i Preventive Veterinary Medicine, 2026</span></div>
+    </header></div>
 
+    <div class="step" data-scene="dagros"><div class="card">
+      <h2>Dagros blir syk</h2>
+      <div class="slot">
       <div class="panel" id="p-cow">
         <svg class="cowsvg" id="cowsvg" viewBox="0 30 400 320" role="img" aria-label="Kua Dagros">
           <ellipse class="cowshadow" cx="200" cy="326" rx="160" ry="11"/>
@@ -227,7 +220,15 @@ details.data h4{margin:1rem 0 .4rem;font:650 .9rem/1.3 var(--f-display);color:va
           </g>
         </svg>
       </div>
+      </div>
+      <p>Dette er Dagros, ett av over 800&nbsp;000 storfe i Norge. En morgen er juret hennes hovent, varmt og ømt. Hun har fått jurbetennelse.</p>
+      <p>Veterinæren kommer og setter en sprøyte med penicillin i muskelen hennes. Jurbetennelse og andre jurproblemer er den vanligste grunnen til at norske kyr får antibiotika.</p>
+      <p>Etterpå melder veterinæren behandlingen inn til VetReg, Mattilsynets register over legemidler til dyr. Det har vært påbudt for matproduserende dyr på land siden 2012, og meldingen skal komme innen sju dager.</p>
+    </div></div>
 
+    <div class="step" data-scene="dots"><div class="card">
+      <h2><span class="num">698&nbsp;864</span> registreringer</h2>
+      <div class="slot">
       <div class="panel" id="p-map"><figure class="fig">
         <p class="fig-h">Storfe i Norge, etter fylke</p>
         <div class="maprow">
@@ -242,7 +243,14 @@ details.data h4{margin:1rem 0 .4rem;font:650 .9rem/1.3 var(--f-display);color:va
         </div>
         <p class="fig-n">Hver sirkel er antall storfe i fylket i 2024. Kilde: SSB, tabell 06447. Kart: Kartverket (CC BY 4.0).</p>
       </figure></div>
+      </div>
+      <p>Fra 2018 til 2023 kom det inn 698&nbsp;864 registreringer av antibiotika til storfe, rundt 320 hver eneste dag. Det er disse forskerne har gått gjennom.</p>
+      <p>Meldingene kommer fra fjøs over hele landet. Flest storfe er det i Innlandet, Trøndelag og Rogaland, som til sammen har over halvparten av de rundt 850&nbsp;000 dyrene.</p>
+    </div></div>
 
+    <div class="step" data-scene="messy"><div class="card">
+      <h2>Men registeret var rotete</h2>
+      <div class="slot">
       <div class="panel" id="p-record">
         <div class="rec" role="figure" aria-label="Eksempel på en registrering i VetReg, med feil og mangler markert">
           <div class="rec-h"><span>VetReg · registrering</span><span>eksempel</span></div>
@@ -259,82 +267,20 @@ details.data h4{margin:1rem 0 .4rem;font:650 .9rem/1.3 var(--f-display);color:va
           </dl>
         </div>
       </div>
-
-      <div class="panel" id="p-plaus"><figure class="fig">
-        <p class="fig-h">Var den registrerte mengden realistisk?</p>
-        <svg data-chart="plaus" role="img" aria-label="94,4 prosent av mengdene lå innenfor grensene, 5,1 prosent under og 0,4 prosent over."></svg>
-        <p class="fig-n">Hver prikk er rundt 2&nbsp;750 av veterinærenes 688&nbsp;193 registreringer, 2018–2023.</p>
-      </figure></div>
-
-      <div class="panel" id="p-quality"><figure class="fig">
-        <p class="fig-h">Veterinærenes registreringer, 2018 og 2023</p>
-        <ul class="legend"><li><i class="dot" style="--c:var(--ctx)"></i>2018</li><li><i class="dot" style="--c:var(--s2)"></i>2023</li></ul>
-        <svg data-chart="quality" role="img" aria-label="Mangler produsentnummer: 15,6 prosent i 2018, 0,1 prosent i 2023. Enhet stemmer: 86,0 til 94,2 prosent. Registrert innen en uke: 58,4 til 77,0 prosent."></svg>
-        <p class="fig-n">Kilde: Baral m.fl., tabell 1, figur 1A og figur 2.</p>
-      </figure></div>
-
-      <div class="panel" id="p-trend"><figure class="fig">
-        <p class="fig-h">Milligram virkestoff per kilo storfe</p>
-        <svg data-chart="trend" role="img" aria-label="3,56 i 2018, 3,63 i 2019, 3,54 i 2020, 3,79 i 2021, 3,53 i 2022 og 3,36 i 2023."></svg>
-        <p class="fig-n">Kilde: Baral m.fl., supplerende tabell S4.</p>
-      </figure></div>
-
-      <div class="panel" id="p-europe"><figure class="fig">
-        <p class="fig-h">Milligram virkestoff per kilo storfe</p>
-        <svg data-chart="europe" role="img" aria-label="Norge 3,4 milligram per kilo i 2023. Åtte EU-land rundt 28 milligram per kilo i 2024."></svg>
-        <p class="fig-n">Norge: 2023. EU-landene: 2024, de åtte landene med god nok datadekning for storfe. Kilde: EMA (ESUAvet).</p>
-      </figure></div>
-
-      <div class="panel" id="p-waffle"><figure class="fig">
-        <p class="fig-h">Andel av alt virkestoff, <span id="wYear">2018</span></p>
-        <ul class="legend"><li><i class="sq" style="--c:var(--s1)"></i>Penicillin (smalspektret)</li><li><i class="sq" style="--c:var(--ctx)"></i>Andre antibiotika</li></ul>
-        <svg data-chart="waffle" role="img" aria-label="Penicillin utgjorde 80,4 prosent i 2018 og 87,9 prosent i 2023."></svg>
-        <p class="fig-n">Hver rute er 1 prosent.</p>
-      </figure></div>
-
-      <div class="panel" id="p-routes"><figure class="fig">
-        <p class="fig-h">Kilo virkestoff etter hvordan det gis, 2018 = 100</p>
-        <ul class="legend"><li><i style="--c:var(--s1)"></i>Injeksjon</li><li><i style="--c:var(--s2)"></i>Rett i juret</li><li><i style="--c:var(--s3)"></i>Gjennom munnen</li></ul>
-        <svg data-chart="routes" role="img" aria-label="Fra 2018 til 2023: injeksjon fra 100 til 103, rett i juret fra 100 til 36, gjennom munnen fra 100 til 19."></svg>
-        <p class="fig-n">I livmoren er ikke vist: under 1 kilo i året.</p>
-      </figure></div>
-
-      <div class="panel" id="p-meter"><figure class="fig">
-        <p class="fig-h">Andel av grossistenes salg som ble registrert i VetReg, 2023</p>
-        <svg data-chart="meter" role="img" aria-label="85 prosent av salget ble registrert."></svg>
-        <p class="fig-n">Alle dyrearter samlet. Kilde: Udhwani m.fl. 2025.</p>
-      </figure></div>
-    </div>
-  </div>
-
-  <div class="steps">
-    <div class="step" data-scene="hero"><header class="card card--title">
-      <h1>Hvor mye antibiotika får norske kyr?</h1>
-      <p class="dek">Hver gang en veterinær behandler et storfe med antibiotika, skal det registreres. Forskere har gått gjennom nesten 700&nbsp;000 slike registreringer, ryddet opp i feilene og regnet seg fram til et svar.</p>
-      <div class="byline"><span>Basert på en studie fra NMBU, Veterinærinstituttet og TINE</span><span>Publisert i Preventive Veterinary Medicine, 2026</span></div>
-    </header></div>
-
-    <div class="step" data-scene="dagros"><div class="card">
-      <h2>Dagros blir syk</h2>
-      <p>Dette er Dagros, ett av over 800&nbsp;000 storfe i Norge. En morgen er juret hennes hovent, varmt og ømt. Hun har fått jurbetennelse.</p>
-      <p>Veterinæren kommer og setter en sprøyte med penicillin i muskelen hennes. Jurbetennelse og andre jurproblemer er den vanligste grunnen til at norske kyr får antibiotika.</p>
-      <p>Etterpå melder veterinæren behandlingen inn til VetReg, Mattilsynets register over legemidler til dyr. Det har vært påbudt for matproduserende dyr på land siden 2012, og meldingen skal komme innen sju dager.</p>
-    </div></div>
-
-    <div class="step" data-scene="dots"><div class="card">
-      <h2><span class="num">698&nbsp;864</span> registreringer</h2>
-      <p>Fra 2018 til 2023 kom det inn 698&nbsp;864 registreringer av antibiotika til storfe, rundt 320 hver eneste dag. Det er disse forskerne har gått gjennom.</p>
-      <p>Meldingene kommer fra fjøs over hele landet. Flest storfe er det i Innlandet, Trøndelag og Rogaland, som til sammen har over halvparten av de rundt 850&nbsp;000 dyrene.</p>
-    </div></div>
-
-    <div class="step" data-scene="messy"><div class="card">
-      <h2>Men registeret var rotete</h2>
+      </div>
       <p>Et register blir aldri bedre enn det som skrives inn. Noen registreringer manglet produsentnummeret, altså hvilken gård dyret sto på. Andre hadde feil enhet, som «stk.» der preparatet er oppgitt i milliliter, eller en mengde som ikke kunne stemme.</p>
       <p>Mange kom også sent. I 2018 kom fire av ti registreringer fra veterinærer inn mer enn en uke etter behandlingen.</p>
     </div></div>
 
     <div class="step" data-scene="plaus"><div class="card">
       <h2>Ryddejobben</h2>
+      <div class="slot">
+      <div class="panel" id="p-plaus"><figure class="fig">
+        <p class="fig-h">Var den registrerte mengden realistisk?</p>
+        <svg data-chart="plaus" role="img" aria-label="94,4 prosent av mengdene lå innenfor grensene, 5,1 prosent under og 0,4 prosent over."></svg>
+        <p class="fig-n">Hver prikk er rundt 2&nbsp;750 av veterinærenes 688&nbsp;193 registreringer, 2018–2023.</p>
+      </figure></div>
+      </div>
       <p>Først ble enhetene rettet. Der registreringen brukte en annen enhet enn preparatomtalen, ble mengden regnet om til enheten som står der.</p>
       <p>Så ble hver mengde sjekket mot hva som er mulig. For legemidler som doseres etter vekt, går grensene fra minste dose til en kalv på 40 kilo til to hele behandlinger med høyeste dose til en okse på 1&nbsp;300 kilo. <span class="num">94,4&nbsp;prosent</span> av mengdene lå innenfor. De fleste som falt utenfor, var for små.</p>
       <p>De urealistiske mengdene, 5,5 prosent av registreringene, ble byttet ut med en gjennomsnittsdose for preparatet. Det endret lite på totalen: Med disse mengdene beholdt som de var, eller fjernet helt, endret årstallene seg med høyst 2,3 prosent.</p>
@@ -342,36 +288,81 @@ details.data h4{margin:1rem 0 .4rem;font:650 .9rem/1.3 var(--f-display);color:va
 
     <div class="step" data-scene="better"><div class="card">
       <h2>Registeret ble bedre</h2>
+      <div class="slot">
+      <div class="panel" id="p-quality"><figure class="fig">
+        <p class="fig-h">Veterinærenes registreringer, 2018 og 2023</p>
+        <ul class="legend"><li><i class="dot" style="--c:var(--ctx)"></i>2018</li><li><i class="dot" style="--c:var(--s2)"></i>2023</li></ul>
+        <svg data-chart="quality" role="img" aria-label="Mangler produsentnummer: 15,6 prosent i 2018, 0,1 prosent i 2023. Enhet stemmer: 86,0 til 94,2 prosent. Registrert innen en uke: 58,4 til 77,0 prosent."></svg>
+        <p class="fig-n">Kilde: Baral m.fl., tabell 1, figur 1A og figur 2.</p>
+      </figure></div>
+      </div>
       <p>Samtidig ble registeret bedre for hvert år. Andelen registreringer uten produsentnummer falt fra 15,6 til <span class="num">0,1&nbsp;prosent</span>, og enheten stemte med preparatomtalen i 94 prosent av registreringene i 2023, mot 86 prosent i 2018.</p>
       <p>Meldingene kom også raskere. I 2018 var 58 prosent registrert innen en uke etter behandlingen. I 2023 var det 77 prosent.</p>
     </div></div>
 
     <div class="step" data-scene="answer"><div class="card">
       <h2>Svaret: 3,4 milligram</h2>
+      <div class="slot">
+      <div class="panel" id="p-trend"><figure class="fig">
+        <p class="fig-h">Milligram virkestoff per kilo storfe</p>
+        <svg data-chart="trend" role="img" aria-label="3,56 i 2018, 3,63 i 2019, 3,54 i 2020, 3,79 i 2021, 3,53 i 2022 og 3,36 i 2023."></svg>
+        <p class="fig-n">Kilde: Baral m.fl., supplerende tabell S4.</p>
+      </figure></div>
+      </div>
       <p>I 2023 ble det registrert 1&nbsp;258 kilo antibiotika til norske storfe, regnet som rent virkestoff. Det er omtrent like mye som en liten bil veier.</p>
       <p>Fordelt på all storfevekten i landet blir det <span class="num">3,4 milligram</span> per kilo dyr i løpet av året, omtrent en tusendel av en sukkerbit. I 2018 var tallet 3,6. Bruken har altså gått ned med rundt 5 prosent på seks år.</p>
     </div></div>
 
     <div class="step" data-scene="europe"><div class="card">
       <h2>Åtte ganger lavere enn i Europa</h2>
+      <div class="slot">
+      <div class="panel" id="p-europe"><figure class="fig">
+        <p class="fig-h">Milligram virkestoff per kilo storfe</p>
+        <svg data-chart="europe" role="img" aria-label="Norge 3,4 milligram per kilo i 2023. Åtte EU-land rundt 28 milligram per kilo i 2024."></svg>
+        <p class="fig-n">Norge: 2023. EU-landene: 2024, de åtte landene med god nok datadekning for storfe. Kilde: EMA (ESUAvet).</p>
+      </figure></div>
+      </div>
       <p>Er 3,4 mye? I 2024 hadde bare åtte EU-land gode nok tall til å regne ut bruken hos storfe. Til sammen brukte de rundt 28 milligram per kilo.</p>
       <p>Norske storfe lå i 2023 på 3,4, altså omtrent <span class="num">åtte ganger lavere</span>.</p>
     </div></div>
 
     <div class="step" data-scene="penicillin"><div class="card">
       <h2>Nesten bare penicillin</h2>
+      <div class="slot">
+      <div class="panel" id="p-waffle"><figure class="fig">
+        <p class="fig-h">Andel av alt virkestoff, <span id="wYear">2018</span></p>
+        <ul class="legend"><li><i class="sq" style="--c:var(--s1)"></i>Penicillin (smalspektret)</li><li><i class="sq" style="--c:var(--ctx)"></i>Andre antibiotika</li></ul>
+        <svg data-chart="waffle" role="img" aria-label="Penicillin utgjorde 80,4 prosent i 2018 og 87,9 prosent i 2023."></svg>
+        <p class="fig-n">Hver rute er 1 prosent.</p>
+      </figure></div>
+      </div>
       <p>Nesten ni av ti milligram er vanlig penicillin. Det er et smalspektret antibiotikum, som virker mot færre typer bakterier enn bredspektrede midler.</p>
       <p>Andelen økte fra 80,4 prosent i 2018 til <span class="num">87,9 prosent</span> i 2023. Samtidig forsvant kombinasjonspreparater med penicillin og streptomycin fra det norske markedet, og andelen aminoglykosider falt fra 10,5 til 1,6 prosent.</p>
     </div></div>
 
     <div class="step" data-scene="routes"><div class="card">
       <h2>Det meste gis som injeksjon</h2>
+      <div class="slot">
+      <div class="panel" id="p-routes"><figure class="fig">
+        <p class="fig-h">Kilo virkestoff etter hvordan det gis, 2018 = 100</p>
+        <ul class="legend"><li><i style="--c:var(--s1)"></i>Injeksjon</li><li><i style="--c:var(--s2)"></i>Rett i juret</li><li><i style="--c:var(--s3)"></i>Gjennom munnen</li></ul>
+        <svg data-chart="routes" role="img" aria-label="Fra 2018 til 2023: injeksjon fra 100 til 103, rett i juret fra 100 til 36, gjennom munnen fra 100 til 19."></svg>
+        <p class="fig-n">I livmoren er ikke vist: under 1 kilo i året.</p>
+      </figure></div>
+      </div>
       <p><span class="num">93 prosent</span> av antibiotikaen gis som injeksjon, altså med sprøyte i muskel, under huden eller i blodåre, og den bruken har holdt seg stabil. Antibiotika som settes rett inn i juret gjennom spenen, falt med nesten to tredjedeler målt i vekt, og med 30 til 35 prosent målt i antall doser. Behandling gjennom munnen og i livmoren falt enda mer.</p>
       <p>Jurproblemer sto for 44 prosent av bruken, og det var her bruken falt mest. Deretter fulgte sykdommer i muskler og skjelett, og i luftveiene.</p>
     </div></div>
 
     <div class="step" data-scene="lower"><div class="card">
       <h2>Et forsiktig anslag</h2>
+      <div class="slot">
+      <div class="panel" id="p-meter"><figure class="fig">
+        <p class="fig-h">Andel av grossistenes salg som ble registrert i VetReg, 2023</p>
+        <svg data-chart="meter" role="img" aria-label="85 prosent av salget ble registrert."></svg>
+        <p class="fig-n">Alle dyrearter samlet. Kilde: Udhwani m.fl. 2025.</p>
+      </figure></div>
+      </div>
       <p>Ikke alt havner i registeret. Sammenlignet med salget fra grossistene fanget VetReg i 2023 opp rundt <span class="num">85 prosent</span> av antibiotikaen til dyr.</p>
       <p>Den virkelige bruken er derfor trolig høyere. Og siden registreringen har blitt bedre for hvert år, kan nedgangen i virkeligheten være større enn 5 prosent.</p>
     </div></div>
@@ -463,7 +454,7 @@ const NS = 'http://www.w3.org/2000/svg';
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fmt = (n, d = 0) => n.toLocaleString('nb-NO', { minimumFractionDigits: d, maximumFractionDigits: d });
 const pct = (v, d = 1) => fmt(v, d) + ' %';
-const tip = $('#tip'), vis = $('#vis'), prog = $('.progress span');
+const tip = $('#tip'), prog = $('.progress span');
 
 /* data: Baral et al., revised manuscript, supplementary tables S3 and S4 */
 const YEARS = [2018, 2019, 2020, 2021, 2022, 2023];
@@ -698,74 +689,30 @@ const FYLKER = [
   });
 }
 
-/* ---------- two layouts: pictures on a sticky stage beside the text (wide screens), or inline under their headings ---------- */
-const deskMQ = matchMedia('(min-width:860px) and (min-aspect-ratio:23/20)');
-const SC = { hero: ['cow'], dagros: ['cow', 'sick'], dots: ['map'], messy: ['record'], plaus: ['plaus'], better: ['quality'],
-  answer: ['trend'], europe: ['europe'], penicillin: ['waffle'], routes: ['routes'], lower: ['meter'], next: ['cow'] };
-const steps = $$('.step');
-let inline = null, cur = null, wTimer = 0;
-steps.forEach(st => { if (st.dataset.scene === 'hero' || st.dataset.scene === 'next') return; const slot = document.createElement('div'); slot.className = 'slot'; st.querySelector('.card').firstElementChild.after(slot); });
-function setMode() {
-  const want = !deskMQ.matches; if (want === inline) return; inline = want;
-  if (inline) {
-    const used = new Set();
-    steps.forEach(st => { const slot = st.querySelector('.slot'); if (!slot) return; const p = SC[st.dataset.scene][0]; if (used.has(p)) return; used.add(p); slot.appendChild($('#p-' + p)); });
-    $('#cowsvg').classList.add('sick'); $('#p-map').classList.remove('on'); clearTimeout(wTimer); waffleSet(reduced ? 1 : 0);
-  } else { $$('.slot .panel').forEach(p => vis.appendChild(p)); cur = null; }
-}
-/* inline: each picture plays once it comes into view */
+/* ---------- one column: each picture plays once it scrolls into view ---------- */
+let wTimer = 0;
+$('#cowsvg').classList.add('sick');
 const io = new IntersectionObserver(es => es.forEach(e => {
-  if (!inline || !e.isIntersecting) return;
+  if (!e.isIntersecting) return;
   e.target.classList.add('on');
   if (e.target.id === 'p-waffle') { clearTimeout(wTimer); waffleSet(reduced ? 1 : 0); if (!reduced) wTimer = setTimeout(() => waffleSet(1), 1600); }
 }), { threshold: .3 });
 $$('.panel').forEach(p => io.observe(p));
 
-/* ---------- sizes follow the picture area (or the text column, inline) ---------- */
+/* ---------- sizes follow the column. Phones fire resize whenever the address bar moves, so redraw (and so replay) only when the width changes ---------- */
 let lastKey = '';
 function layout(force) {
-  const r = inline ? { width: $('.step[data-scene="dagros"] .card').getBoundingClientRect().width, height: Math.min(innerHeight * .62, 440) } : vis.getBoundingClientRect();
-  const w = Math.round(Math.min(r.width, 620));
-  /* phones fire resize whenever the address bar shows or hides; redraw (and so replay) the charts only when the width changes */
-  const key = (inline ? 'i' : 'd') + w + (inline ? '' : 'x' + Math.round(r.height));
-  if (force || key !== lastKey) {
-    lastKey = key;
-    const map = $('#normap'); map.style.height = inline ? '' : Math.min(r.height - 80, 400) + 'px';
-    const mapW = inline ? 0 : map.getBoundingClientRect().width;
-    $$('svg[data-chart]').forEach(svg => {
-      const fig = svg.closest('.fig'); svg.textContent = '';
-      const extra = inline ? 0 : [...fig.children].filter(c => c !== svg).reduce((a, c) => a + c.offsetHeight, 0) + (fig.children.length - 1) * 9;
-      const ww = svg.dataset.chart === 'recs' && !inline ? Math.max(150, w - Math.round(mapW) - 16) : w;
-      CHARTS[svg.dataset.chart](svg, ww, Math.max(140, r.height - extra - 4));
-    });
-  }
-  const cow = $('#cowsvg'), cw = Math.min(r.width, 640), ch = inline ? cw * 320 / 400 : Math.min(r.height, cw * 320 / 400);
-  cow.style.height = inline ? '' : ch + 'px';
-  cow.style.setProperty('--k', Math.min(cw / 400, ch / 320).toFixed(3));
+  const w = Math.round(Math.min($('.slot').getBoundingClientRect().width, 720)), hMax = Math.min(innerHeight * .62, 440);
+  const key = 'w' + w; if (!force && key === lastKey) return; lastKey = key;
+  const row = getComputedStyle($('.maprow')).flexDirection === 'row', mapW = row ? $('#normap').getBoundingClientRect().width : 0;
+  $$('svg[data-chart]').forEach(svg => { svg.textContent = ''; CHARTS[svg.dataset.chart](svg, svg.dataset.chart === 'recs' && row ? Math.max(150, w - Math.round(mapW) - 20) : w, hMax); });
+  $('#cowsvg').style.setProperty('--k', (Math.min(w, 640) / 400).toFixed(3));
 }
-
-/* ---------- scenes (wide screens only) ---------- */
-function apply(name) {
-  cur = name; const [p, mod] = SC[name];
-  $$('.panel').forEach(e => { const on = e.id === 'p-' + p; if (on) e.classList.remove('done'); else if (e.classList.contains('on')) e.classList.add('done'); e.classList.toggle('on', on); });
-  $('#cowsvg').classList.toggle('sick', mod === 'sick');
-  clearTimeout(wTimer); hideTip();
-  if (p === 'waffle') { waffleSet(reduced ? 1 : 0); if (!reduced) wTimer = setTimeout(() => waffleSet(1), 1600); }
-}
-function onScroll() {
-  if (!inline) {
-    const trig = innerHeight * .7; let idx = 0;
-    steps.forEach((st, i) => { if (st.firstElementChild.getBoundingClientRect().top < trig) idx = i; });
-    if (steps[idx].dataset.scene !== cur) apply(steps[idx].dataset.scene);
-  }
-  const max = document.documentElement.scrollHeight - innerHeight;
-  prog.style.setProperty('--p', max > 0 ? Math.min(1, scrollY / max).toFixed(4) : 0);
-}
+function onScroll() { const max = document.documentElement.scrollHeight - innerHeight; prog.style.setProperty('--p', max > 0 ? Math.min(1, scrollY / max).toFixed(4) : 0); }
 let ticking = false;
 addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; onScroll(); }); } }, { passive: true });
-const refit = force => { setMode(); layout(force === true); onScroll(); };
+const refit = force => { layout(force === true); onScroll(); };
 let rT = 0; addEventListener('resize', () => { clearTimeout(rT); rT = setTimeout(refit, 120); });
-deskMQ.addEventListener('change', refit);
 
 /* ---------- the numbers, as tables ---------- */
 $('#tblUse').innerHTML = YEARS.map((y, i) => `<tr><td>${y}</td><td>${fmt(USE.total[i], 1)}</td><td>${fmt(USE.mgkg[i], 2)}</td><td>${fmt(USE.par[i], 1)}</td><td>${fmt(USE.imm[i], 1)}</td><td>${fmt(USE.oral[i], 1)}</td><td>${fmt(USE.iu[i], 1)}</td></tr>`).join('');
