@@ -323,11 +323,11 @@ details.data h4{margin:1rem 0 .4rem;font:650 .9rem/1.3 var(--f-display);color:va
       <div class="slot">
       <div class="panel" id="p-europe"><figure class="fig">
         <p class="fig-h">Milligram virkestoff per kilo storfe</p>
-        <svg data-chart="europe" role="img" aria-label="Norge 3,4 milligram per kilo i 2023. Åtte EU-land rundt 28 milligram per kilo i 2024."></svg>
-        <p class="fig-n">Norge: 2023. EU-landene: 2024, de åtte landene med god nok datadekning for storfe. Kilde: EMA (ESUAvet).</p>
+        <svg data-chart="europe" role="img" aria-label="Norge 3,4 milligram per kilo i 2023. Åtte EU-land sett under ett rundt 28 milligram per kilo i 2024."></svg>
+        <p class="fig-n">Norge: 2023. EU-landene: 2024, de åtte landene med god nok datadekning for storfe, all bruk delt på all storfevekt i de åtte. Kilde: EMA (ESUAvet).</p>
       </figure></div>
       </div>
-      <p>Er 3,4 mye? I 2024 hadde bare åtte EU-land gode nok tall til å regne ut bruken hos storfe. Til sammen brukte de rundt 28 milligram per kilo.</p>
+      <p>Er 3,4 mye? I 2024 hadde bare åtte EU-land gode nok tall til å regne ut bruken hos storfe. Alt de åtte brukte, delt på all storfevekten deres, gir rundt 28 milligram per kilo. Det er et felles gjennomsnitt for de åtte landene, ikke tallene deres lagt sammen.</p>
       <p>Norske storfe lå i 2023 på 3,4, altså omtrent <span class="num">åtte ganger lavere</span>.</p>
     </div></div>
 
@@ -391,7 +391,7 @@ details.data h4{margin:1rem 0 .4rem;font:650 .9rem/1.3 var(--f-display);color:va
       <h3>Slik ble bruken regnet ut</h3>
       <p>Mengden virkestoff er regnet ut fra styrken i preparatomtalen. Biomassen er antall storfe fra Statistisk sentralbyrå (tabell 03710) ganger 425 kilo, standardvekten EU bruker for storfe. Forskerne regnet også i definerte dagsdoser (DDDvet) og fant de samme trendene.</p>
       <h3>Europeiske tall</h3>
-      <p>EMA, ESUAvet-rapporten for 2024. Bare Kroatia, Tsjekkia, Danmark, Estland, Italia, Nederland, Slovenia og Spania hadde minst 90 prosent datadekning for storfe. Til sammen har de 22,9 prosent av storfebiomassen i EU.</p>
+      <p>EMA, ESUAvet-rapporten for 2024. Bare Kroatia, Tsjekkia, Danmark, Estland, Italia, Nederland, Slovenia og Spania hadde minst 90 prosent datadekning for storfe. Til sammen har de 22,9 prosent av storfebiomassen i EU. Tallet 28 milligram per kilo er samlet bruk i de åtte landene delt på samlet storfevekt, et felles gjennomsnitt og ikke en sum.</p>
       <h3>Dekning</h3>
       <p>Udhwani m.fl. 2025 (BMC Veterinary Research): VetReg fanget opp 85 prosent av grossistenes salg til dyr i 2023.</p>
       <h3>Finansiering</h3>
@@ -442,7 +442,7 @@ details.data h4{margin:1rem 0 .4rem;font:650 .9rem/1.3 var(--f-display);color:va
           <tr><td>Jur og spener, snitt per år</td><td>1,58 mg/kg</td></tr>
           <tr><td>Muskler og skjelett, snitt per år</td><td>0,66 mg/kg</td></tr>
           <tr><td>Luftveier og blod, snitt per år</td><td>0,31 mg/kg</td></tr>
-          <tr><td>Åtte EU-land, 2024</td><td>ca. 28 mg/kg</td></tr>
+          <tr><td>Åtte EU-land sett under ett, 2024</td><td>ca. 28 mg/kg</td></tr>
           <tr><td>VetReg mot grossistsalg, 2023</td><td>85&nbsp;%</td></tr>
         </tbody></table></div>
       </details>
@@ -591,7 +591,7 @@ function europe(svg, w) {
     svg.appendChild(el('line', { class: t ? 'c-grid' : 'c-axis', x1: x(t), x2: x(t), y1: 4, y2: h - 22 }));
     svg.appendChild(el('text', { class: 'c-tick', x: x(t), y: h - 6, 'text-anchor': t ? 'middle' : 'start' }, String(t)));
   });
-  [{ n: 'Norge, 2023', d: 3.4, v: '3,4 mg/kg', c: 'var(--s1)' }, { n: 'Åtte EU-land, 2024', d: 28, v: 'ca. 28 mg/kg', c: 'var(--ctx)' }].forEach((r, i) => {
+  [{ n: 'Norge, 2023', d: 3.4, v: '3,4 mg/kg', c: 'var(--s1)' }, { n: 'Åtte EU-land sett under ett, 2024', d: 28, v: 'ca. 28 mg/kg', c: 'var(--ctx)' }].forEach((r, i) => {
     const y0 = 8 + i * 60, by = y0 + 14, x1 = x(r.d), d = .1 + i * .25;
     svg.appendChild(el('text', { class: 'c-lab', x: 0, y: y0 + 4 }, r.n));
     grow(svg.appendChild(el('path', { d: `M0 ${by}H${x1 - 4}Q${x1} ${by} ${x1} ${by + 4}V${by + bar - 4}Q${x1} ${by + bar} ${x1 - 4} ${by + bar}H0Z`, style: `fill:${r.c}` })), d, 0, by, .7);
