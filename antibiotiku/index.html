@@ -141,7 +141,8 @@ a:focus-visible,[tabindex]:focus-visible,summary:focus-visible{outline:2px solid
 .c-dot{stroke:var(--bg);stroke-width:2}
 /* chart marks start hidden or collapsed (.fade/.rise/.pop/.grow, or an inline dash offset / translate). Each has its own
    delay --d and duration --dur; together they form the picture's timeline. The script keeps the animations paused and
-   seeks them from the scroll position (html.scrub), so the scroll draws the picture and scrolling back undraws it. */
+   seeks them (html.scrub): the scroll sets how far along a picture should be, and the picture follows at its own pace,
+   forwards or backwards. */
 .anim.fade{opacity:0}
 .anim.rise{opacity:0;transform:translateY(6px)}
 .anim.pop{transform-box:fill-box;transform-origin:center;transform:scale(0)}
@@ -691,35 +692,61 @@ const FYLKER = [
   });
 }
 
-/* ---------- one column, drawn by the scroll. A picture entering at the bottom of the window is at its start; by the time
-   its top is a little above the middle it is complete; scrolling back up runs it backwards. The CSS animations stay paused
-   and are seeked to the scroll progress (reduced motion: they simply complete). ---------- */
+/* ---------- one column, paced by the scroll. The scroll only says how far along a picture should be: at its start while
+   its top is still in the lower third of the window (the reader is on the heading or the text before it), complete once
+   the whole picture is in view with a margin below it, or its top has reached the upper part of the window. The picture follows that target at its own
+   unhurried pace (PACE milliseconds for a whole build), so a reader who scrolls straight to it still sees it finishing, a slow
+   reader lets the scroll lead, and scrolling back up undraws it the same way. The CSS animations stay paused and are
+   seeked (reduced motion: they simply complete). ---------- */
 $('#cowsvg').classList.add('sick');
 const scrub = !reduced && 'getAnimations' in Element.prototype;
 if (scrub) document.documentElement.classList.add('scrub');
-const panels = $$('.panel').map(el => ({ el, anims: null, T: 1 }));
+const PACE = 2600;
+const panels = $$('.panel').map(el => ({ el, anims: null, T: 1, D: PACE, t: 0, goal: 0 }));
 const io = new IntersectionObserver(es => es.forEach(e => {
   if (!e.isIntersecting) return;
   e.target.classList.add('on');
   if (!scrub && e.target.id === 'p-waffle') waffleSet(1);
+  if (scrub) scrollAnim();
 }), { threshold: 0 });
 panels.forEach(p => io.observe(p.el));
 const isCss = x => typeof CSSAnimation === 'undefined' ? 'animationName' in x : x instanceof CSSAnimation;
-function progress(r) { const vh = innerHeight, endTop = Math.min(Math.max(vh - r.height - .08 * vh, .18 * vh), .4 * vh); return Math.min(1, Math.max(0, (vh - r.top) / (vh - endTop))); }
+function target(r) {
+  const vh = innerHeight, y0 = .62 * vh, y1 = Math.min(.42 * vh, Math.max(.12 * vh, .88 * vh - r.height));
+  return Math.min(1, Math.max(0, (y0 - r.top) / (y0 - y1)));
+}
+function seek(p) {
+  p.anims.forEach(x => { x.currentTime = p.t; });
+  if (p.el.id === 'p-waffle') { const st = p.t >= .85 * p.T ? 1 : 0; if (st !== wState) waffleSet(st); }
+}
+let raf = 0, lastTs = 0;
+function tick(ts) {
+  raf = 0;
+  const dt = lastTs ? Math.min(50, ts - lastTs) : 16; lastTs = ts;
+  let busy = false;
+  panels.forEach(p => {
+    if (!p.anims || p.t === p.goal) return;
+    const step = dt * p.T / p.D, gap = p.goal - p.t;
+    p.t = Math.abs(gap) <= step ? p.goal : p.t + Math.sign(gap) * step;
+    seek(p); if (p.t !== p.goal) busy = true;
+  });
+  if (busy) raf = requestAnimationFrame(tick); else lastTs = 0;
+}
 function scrollAnim() {
   if (!scrub) return;
   const vh = innerHeight;
   panels.forEach(p => {
     if (!p.el.classList.contains('on')) return;
-    const r = p.el.getBoundingClientRect(); if (r.bottom < -vh || r.top > 2 * vh) return;
+    const r = p.el.getBoundingClientRect();
     if (!p.anims) {
       p.anims = p.el.getAnimations({ subtree: true }).filter(isCss); p.anims.forEach(x => x.pause());
       p.T = Math.max(1, ...p.anims.map(x => { const t = x.effect.getTiming(); return t.delay + (typeof t.duration === 'number' ? t.duration : 0); }));
+      p.D = Math.max(PACE, 1.5 * p.T); p.t = Math.min(p.t, p.T); seek(p);
     }
-    const t = progress(r) * p.T;
-    p.anims.forEach(x => { x.currentTime = t; });
-    if (p.el.id === 'p-waffle') { const st = t >= .85 * p.T ? 1 : 0; if (st !== wState) waffleSet(st); }
+    p.goal = target(r) * p.T;
+    if (r.bottom < -vh || r.top > 2 * vh) { p.t = p.goal; seek(p); }
   });
+  if (!raf && panels.some(p => p.anims && p.t !== p.goal)) raf = requestAnimationFrame(tick);
 }
 
 /* ---------- sizes follow the column. Phones fire resize whenever the address bar moves, so redraw (and so replay) only when the width changes ---------- */
