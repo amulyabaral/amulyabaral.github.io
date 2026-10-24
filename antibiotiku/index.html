@@ -56,11 +56,11 @@ a:focus-visible,[tabindex]:focus-visible,summary:focus-visible{outline:2px solid
 /* ---------- pictures ---------- */
 .story{position:relative}
 .panel{display:grid;place-items:center;width:100%}
-.slot{margin:.2rem 0 .3rem}
+.slot{margin:1.25rem 0 .75rem}
 @media (min-width:60rem){.slot{width:calc(100% + 8rem);margin-left:-4rem}}
 .fig{width:100%;max-width:720px;margin:0;display:flex;flex-direction:column;gap:.55rem}
 .fig svg{display:block;width:100%;height:auto;overflow:visible}
-.fig-h{margin:0;font:600 clamp(.95rem,.9rem + .25vw,1.08rem)/1.3 var(--f-display);text-wrap:balance}
+.fig-h{margin:0;font:600 clamp(.92rem,.88rem + .2vw,1.02rem)/1.3 var(--f-display);color:var(--ink-2);text-wrap:balance}
 .fig-n{margin:0;font:400 .78rem/1.4 var(--f-display);color:var(--ink-3)}
 .legend{display:flex;flex-wrap:wrap;gap:.35rem 1rem;margin:0;padding:0;list-style:none;font:500 .8rem/1.3 var(--f-display);color:var(--ink-2)}
 .legend li{display:flex;align-items:center;gap:.4rem}
@@ -139,13 +139,15 @@ a:focus-visible,[tabindex]:focus-visible,summary:focus-visible{outline:2px solid
 .c-big{fill:var(--ink);font:700 28px var(--f-display);letter-spacing:-.01em}
 .c-line{fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .c-dot{stroke:var(--bg);stroke-width:2}
-/* chart marks start hidden or collapsed (.fade/.rise/.pop/.grow, or an inline dash offset / translate) and play once their
-   panel has scrolled into view (.on), each after its own delay --d. */
+/* chart marks start hidden or collapsed (.fade/.rise/.pop/.grow, or an inline dash offset / translate). Each has its own
+   delay --d and duration --dur; together they form the picture's timeline. The script keeps the animations paused and
+   seeks them from the scroll position (html.scrub), so the scroll draws the picture and scrolling back undraws it. */
 .anim.fade{opacity:0}
 .anim.rise{opacity:0;transform:translateY(6px)}
 .anim.pop{transform-box:fill-box;transform-origin:center;transform:scale(0)}
 .anim.grow{transform:scaleX(0)}
 .panel.on .anim{animation-name:in;animation-duration:var(--dur,.5s);animation-timing-function:var(--ease,cubic-bezier(.2,.7,.2,1));animation-delay:calc(var(--d,0s) + .1s);animation-fill-mode:both}
+.scrub .panel.on .anim,.scrub .panel.on .cowsvg.sick .note-ring,.scrub .panel.on .cowsvg.sick .note-line,.scrub .panel.on .cowsvg.sick .note-txt{animation-play-state:paused}
 @keyframes in{to{opacity:1;transform:none;stroke-dashoffset:0}}
 @keyframes pop{from{transform:scale(0)}}
 @keyframes fadein{from{opacity:0}}
@@ -689,15 +691,36 @@ const FYLKER = [
   });
 }
 
-/* ---------- one column: each picture plays once it scrolls into view ---------- */
-let wTimer = 0;
+/* ---------- one column, drawn by the scroll. A picture entering at the bottom of the window is at its start; by the time
+   its top is a little above the middle it is complete; scrolling back up runs it backwards. The CSS animations stay paused
+   and are seeked to the scroll progress (reduced motion: they simply complete). ---------- */
 $('#cowsvg').classList.add('sick');
+const scrub = !reduced && 'getAnimations' in Element.prototype;
+if (scrub) document.documentElement.classList.add('scrub');
+const panels = $$('.panel').map(el => ({ el, anims: null, T: 1 }));
 const io = new IntersectionObserver(es => es.forEach(e => {
   if (!e.isIntersecting) return;
   e.target.classList.add('on');
-  if (e.target.id === 'p-waffle') { clearTimeout(wTimer); waffleSet(reduced ? 1 : 0); if (!reduced) wTimer = setTimeout(() => waffleSet(1), 1600); }
-}), { threshold: .3 });
-$$('.panel').forEach(p => io.observe(p));
+  if (!scrub && e.target.id === 'p-waffle') waffleSet(1);
+}), { threshold: 0 });
+panels.forEach(p => io.observe(p.el));
+const isCss = x => typeof CSSAnimation === 'undefined' ? 'animationName' in x : x instanceof CSSAnimation;
+function progress(r) { const vh = innerHeight, endTop = Math.min(Math.max(vh - r.height - .08 * vh, .18 * vh), .4 * vh); return Math.min(1, Math.max(0, (vh - r.top) / (vh - endTop))); }
+function scrollAnim() {
+  if (!scrub) return;
+  const vh = innerHeight;
+  panels.forEach(p => {
+    if (!p.el.classList.contains('on')) return;
+    const r = p.el.getBoundingClientRect(); if (r.bottom < -vh || r.top > 2 * vh) return;
+    if (!p.anims) {
+      p.anims = p.el.getAnimations({ subtree: true }).filter(isCss); p.anims.forEach(x => x.pause());
+      p.T = Math.max(1, ...p.anims.map(x => { const t = x.effect.getTiming(); return t.delay + (typeof t.duration === 'number' ? t.duration : 0); }));
+    }
+    const t = progress(r) * p.T;
+    p.anims.forEach(x => { x.currentTime = t; });
+    if (p.el.id === 'p-waffle') { const st = t >= .85 * p.T ? 1 : 0; if (st !== wState) waffleSet(st); }
+  });
+}
 
 /* ---------- sizes follow the column. Phones fire resize whenever the address bar moves, so redraw (and so replay) only when the width changes ---------- */
 let lastKey = '';
@@ -707,8 +730,9 @@ function layout(force) {
   const row = getComputedStyle($('.maprow')).flexDirection === 'row', mapW = row ? $('#normap').getBoundingClientRect().width : 0;
   $$('svg[data-chart]').forEach(svg => { svg.textContent = ''; CHARTS[svg.dataset.chart](svg, svg.dataset.chart === 'recs' && row ? Math.max(150, w - Math.round(mapW) - 20) : w, hMax); });
   $('#cowsvg').style.setProperty('--k', (Math.min(w, 640) / 400).toFixed(3));
+  panels.forEach(p => { p.anims = null; });
 }
-function onScroll() { const max = document.documentElement.scrollHeight - innerHeight; prog.style.setProperty('--p', max > 0 ? Math.min(1, scrollY / max).toFixed(4) : 0); }
+function onScroll() { const max = document.documentElement.scrollHeight - innerHeight; prog.style.setProperty('--p', max > 0 ? Math.min(1, scrollY / max).toFixed(4) : 0); scrollAnim(); }
 let ticking = false;
 addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; onScroll(); }); } }, { passive: true });
 const refit = force => { layout(force === true); onScroll(); };
