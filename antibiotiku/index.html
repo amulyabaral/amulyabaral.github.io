@@ -80,9 +80,10 @@ a:focus-visible,[tabindex]:focus-visible,summary:focus-visible{outline:2px solid
 .small{font-size:.9rem;color:var(--ink-2)}
 .num{font-family:var(--f-display);font-weight:700;white-space:nowrap;background:linear-gradient(transparent 58%,var(--hl) 58%,var(--hl) 92%,transparent 92%)}
 .card--title{gap:.9rem}
+.card--title{text-align:center}
 .card--title h1{margin:0;font:700 clamp(2.1rem,1.4rem + 3.2vw,4.2rem)/1.02 var(--f-title);letter-spacing:-.015em;text-wrap:balance}
 .dek{font-size:clamp(1.04rem,1rem + .4vw,1.28rem);line-height:1.45;color:var(--ink-2)}
-.byline{display:flex;flex-wrap:wrap;gap:.25rem .9rem;font:500 .82rem/1.4 var(--f-display);color:var(--ink-3);border-top:1px solid var(--line);padding-top:.75rem}
+.byline{display:flex;flex-wrap:wrap;justify-content:center;gap:.25rem .9rem;font:500 .82rem/1.4 var(--f-display);color:var(--ink-3);border-top:1px solid var(--line);padding-top:.75rem}
 
 @media (min-width:60rem){
   .fig .maprow{flex-direction:row;align-items:flex-end;gap:1.25rem}
