@@ -40,7 +40,7 @@ Each Nordic country tracks resistance and antibiotic use in its own way, and hum
 
 ### Run (sometimes marathons)
 
-I am quite the tortoise right now; ideally would like to run a full marathon under 3 hours some day in the near future. Some stats:
+I am quite the tortoise right now; ideally would like to run a full marathon under 3 hours some day in the near future. Here are some of my stats:
 5K – 22:26
 10K – 47:30
 Half marathon – 1:41:10
@@ -55,17 +55,17 @@ Marathon – 3:56:27
 
 ### Go bikepacking
 
-2026 – Ålesund to Trondheim, ~500 km in 6 days along the Atlantic Road / EuroVelo 1, wild camping with some small detours.
+2026 – I biked from Ålesund to Trondheim (which is about 500 km) in 6 days along the Atlantic Road / EuroVelo 1 (with some detours) with a friend. We mostly did wild camping.
 
-<img src="/images/bike.png" alt="Watercolor of Amulya Baral on the bike" width="300">
+I want to do atleast one multi-day bikepacking trip every year. 
 
 ### Wear the same clothes everyday
 
-Sorry if you're tired of always seeing me in the same black t-shirt, pants and shoes. I rotate through 10 of the same t-shirts, 3 of the same sweaters, and 2 of the same pants and that's pretty much 90% of the clothing I own. The term is "onebag minimalist". It's amazing! I've travelled for weeks at an end with just a "free personal item" bag without sacrificing on comfort. I keep a database of what, when and why I bought something (other than consumables like detergent, food, etc). It really helps in being more mindful of consumerism and make the most of things I already own. Started doing it from 2024 after being inspired by [Jeremy Maluf's indefinite backpack travel setup](https://jeremymaluf.com/onebag/).
+Sorry if you're tired of always seeing me in the same black t-shirt, pants and shoes. I rotate through 10 of the same t-shirts, 3 of the same sweaters, and 2 of the same pants and that's pretty much 90% of the clothing I own. People like to call it "onebag minimalism". It's amazing! I've travelled for weeks at an end with just a "free personal item" bag without sacrificing on comfort. I keep a database of what, when and why I bought something (other than consumables like detergent, food, etc). It really helps in being more mindful of consumerism and make the most of things I already own. Started doing it from 2024 after being inspired by [Jeremy Maluf's indefinite backpack travel setup](https://jeremymaluf.com/onebag/).
 
 ### Get a bit nerdy about coffee
 
-I worked weekends in the bar at a restaurant in Oslo as a student, where I made cocktails and (horrible, trust me) coffee for customers. Somehow that got me into coffee. My setup right now is a Kingrinder K6 (manual grinder) and an Aeropress Go. I occasionally like to try different brew methods, but the aeropress is a staple. I have a monthly coffee subscription to try different beans (it's a surprise every month!). Always a joy when there's a washed kenyan variety in the box.
+I worked weekends in the bar at a restaurant in Oslo as a student, where I made cocktails and (horrible, trust me) coffee for customers. Somehow that got me into coffee. My main setup right now is a Kingrinder K6 (manual grinder), Wilfa Zense and an Aeropress Go. I occasionally like to try different brew methods, but the aeropress is a staple when I'm travelling. I have a monthly coffee subscription from Solberg and Hansen to try different beans. Always a joy when there's a washed kenyan variety in the box!
 
 ### Get a bit nerdy about "budget audiophile" hardware
 
