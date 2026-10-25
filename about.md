@@ -1,7 +1,7 @@
 
 <img src="/images/amulya_watercolor.png" alt="Watercolor portrait of Amulya Baral" width="270">
 
-Hi, I’m Amulya Baral! I’m a final-year PhD researcher at NMBU and I spend most of my time digging through cow poop DNA (with computers, thankfully) to figure out why antibiotic resistance genes hang around in Norwegian cattle, even though they barely get any antibiotics. I find bacteria (and their genes) extremely cool, so I also work on how their movement across humans, animals and the environment can be tracked together.
+Hi, I’m Amulya Baral! I’m a final-year PhD researcher at NMBU where I spend most of my time digging through cow poop DNA (with computers, thankfully) to figure out why antibiotic resistance genes hang around in Norwegian cattle, even though they barely get any antibiotics. I find bacteria (and their genes) extremely cool, so I also work on how their movement across humans, animals and the environment can be tracked together.
 
 You can find a bunch of my links below.
 
@@ -30,7 +30,7 @@ A feed additive called Bovaer makes cattle burp out (and fart) less methane, so 
 
 Each Nordic country tracks resistance and antibiotic use in its own way, and humans, animals, food and the environment are usually tracked separately. That makes it hard to compare countries or spot a problem early, before it crosses a border. I was very lucky to be a part of the NoMoreAMR project. We mapped every surveillance system in the Nordics into one open website [nomoreamr.org](https://nomoreamr.org) and wrote a roadmap for tying them together. It's doable, but it needs connected data systems and clear rules for sharing data across borders. [Paper published in Public Health, 2026.](https://doi.org/10.1016/j.puhe.2026.106285)
 
-## Alongside it
+## Alongside the PhD,
 
 - I made and maintain [openpathogen.org](https://openpathogen.org), an open-source, no-code pathogen profiling platform that runs everything client-side using WASM.
 - I am a board member (communications leader) of SoDoC, a free and non-political interest organization for PhDs, postdocs and temporary research staff at NMBU.
