@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Amulya Baral</title>
+<meta name="description" content="Amulya Baral, final-year PhD researcher at NMBU working on antimicrobial resistance with large-scale metagenomics.">
+<link rel="icon" type="image/png" href="/images/favicon.png">
+<meta property="og:image" content="https://amulya.no/images/amulya_watercolor.png">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+<script data-goatcounter="https://amulya.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<style>
+/* One column: three links, then about.md (the home page), cv.md or papers.md. */
+:root{--bg:#fff;--fg:#111113;--fg-2:#5f5f66;--fg-3:#9b9ba1;--line:#e6e6e9;--sans:Inter,Arial,Helvetica,system-ui,sans-serif;--l:max(20px,env(safe-area-inset-left,0px));--r:max(20px,env(safe-area-inset-right,0px))}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0b0c;--fg:#ededef;--fg-2:#a1a1a8;--fg-3:#6b6b72;--line:#242427;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0b0b0c;--fg:#ededef;--fg-2:#a1a1a8;--fg-3:#6b6b72;--line:#242427;color-scheme:dark}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 15px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration-line:underline;text-decoration-thickness:1px;text-decoration-color:var(--fg-3);text-underline-offset:3px}
+a:hover{text-decoration-color:currentColor}
+:focus-visible{outline:2px solid var(--fg);outline-offset:2px;border-radius:4px}
+main{box-sizing:border-box;max-width:40rem;margin:0 auto;padding:max(20px,env(safe-area-inset-top,0px)) var(--r) max(48px,env(safe-area-inset-bottom,0px)) var(--l)}
+nav{display:flex;gap:18px}
+nav a{color:var(--fg-2);font-weight:500;text-decoration:none}
+nav a:hover,nav a[aria-current]{color:var(--fg)}
+nav a[aria-current]{text-decoration:underline;text-underline-offset:5px}
+
+.doc h1{margin:28px 0 10px;font-size:24px;line-height:1.1;font-weight:600;letter-spacing:-.025em}
+.doc h2{font-size:18px;font-weight:600;letter-spacing:-.01em;margin:30px 0 10px}
+.doc p{margin:0 0 12px}
+.doc ul,.doc ol{padding-left:18px;margin:0 0 12px}
+.doc li{margin:4px 0}
+.doc details{border-top:1px solid var(--line);padding:11px 0}
+.doc details details{border:0;padding:7px 0 0 14px}
+.doc summary{display:flex;justify-content:space-between;gap:12px;cursor:pointer;font-weight:500;list-style:none}
+.doc summary::-webkit-details-marker{display:none}
+.doc summary::after{content:"+";color:var(--fg-3)}
+.doc details[open]>summary::after{content:"\2013"}
+.doc details>:not(summary):first-of-type{margin-top:8px}
+.doc img{display:block;max-width:100%;height:auto;margin:12px 0;border-radius:6px}
+.doc table,.doc tbody,.doc tr,.doc td{display:block}
+.doc table{margin:10px 0 16px}
+.doc tr:first-child{display:none}
+.doc tr{padding:12px 0;border-top:1px solid var(--line)}
+.doc td:first-child{font-size:12px;color:var(--fg-3)}
+.doc td:nth-child(2){font-weight:500}
+.doc td:nth-child(n+3){font-size:13px;color:var(--fg-2)}
+.doc code{font-size:.9em;padding:1px 4px;border-radius:4px;background:var(--line)}
+.doc hr{border:0;border-top:1px solid var(--line);margin:24px 0}
+</style>
+</head>
+<body>
+<main>
+  <nav><a href="#about">About</a><a href="#cv">CV</a><a href="#papers">Papers</a></nav>
+  <article class="doc" id="doc"><noscript>This page needs JavaScript to show <a href="about.md">about.md</a>, <a href="cv.md">cv.md</a> and <a href="papers.md">papers.md</a>.</noscript></article>
+</main>
+
+<script>
+/* about.md (the home page), cv.md, papers.md
+   # Title   ## Heading   ### expandable section (runs to the next heading)   #### expandable inside the ### above
+   | a | b | table row (first row is the header)   - item   1. item   ---  rule   new line = line break
+   **bold** *italic* `code` [text](url) ![alt](image)   A line starting with < is raw HTML. */
+const pages = { about: ['about.md', 'About'], cv: ['cv.md', 'CV'], papers: ['papers.md', 'Papers'] }, cache = {};
+const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const inline = s => esc(s)
+  .replace(/`([^`]+)`/g, '<code>$1</code>')
+  .replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, '<img src="$2" alt="$1" loading="lazy">')
+  .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, t, u) => `<a href="${u}"${/^https?:/.test(u) ? ' target="_blank" rel="noopener"' : ''}>${t}</a>`)
+  .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+  .replace(/\*([^*]+)\*/g, '<em>$1</em>');
+function render(md) {
+  let html = '', list = null, para = [], table = false, depth = 0, m;
+  const endPara = () => { if (para.length) { html += `<p>${para.map(inline).join('<br>')}</p>`; para = []; } };
+  const endList = () => { if (list) { html += `</${list}>`; list = null; } };
+  const endTable = () => { if (table) { html += '</table>'; table = false; } };
+  const endBlock = () => { endPara(); endList(); endTable(); };
+  const closeDetails = n => { endBlock(); while (depth > n) { html += '</details>'; depth--; } };
+  for (const raw of md.replace(/(\]\(|src=")\/images\//g, '$1images/').split('\n')) {
+    const line = raw.trimEnd();
+    if (m = line.match(/^(#{1,6}) +(.*)/)) {
+      const n = m[1].length;
+      if (n >= 3) { closeDetails(n - 3); html += `<details><summary>${inline(m[2])}</summary>`; depth++; }
+      else { closeDetails(0); html += `<h${n}>${inline(m[2])}</h${n}>`; }
+    } else if (m = line.match(/^ *([-*]|\d+\.) +(.*)/)) {
+      endPara(); endTable();
+      const t = m[1].length === 1 ? 'ul' : 'ol';
+      if (list !== t) { endList(); html += `<${t}>`; list = t; }
+      html += `<li>${inline(m[2])}</li>`;
+    } else if (line[0] === '|') {
+      endPara(); endList();
+      if (!/^[\s|:-]+$/.test(line)) { if (!table) { html += '<table>'; table = true; } html += '<tr>' + line.replace(/^\||\|$/g, '').split('|').map(c => `<td>${inline(c.trim())}</td>`).join('') + '</tr>'; }
+    } else if (/^-{3,}$/.test(line)) { endBlock(); html += '<hr>'; }
+    else if (line[0] === '<') { endBlock(); html += line; }
+    else if (!line) endBlock();
+    else { endList(); endTable(); para.push(line); }
+  }
+  closeDetails(0);
+  return html;
+}
+
+const doc = document.getElementById('doc'), links = document.querySelectorAll('nav a');
+const current = () => pages[location.hash.slice(1)] ? location.hash.slice(1) : 'about';   // no hash, or an unknown one, is the home page
+async function route() {
+  const key = current(), [file, label] = pages[key];
+  for (const a of links) a.getAttribute('href') === '#' + key ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current');
+  document.title = key === 'about' ? 'Amulya Baral' : `${label} · Amulya Baral`;
+  const html = await (cache[key] ||= fetch(file).then(r => r.ok ? r.text() : Promise.reject()).then(render, () => `<p>Could not load ${file}.</p>`));
+  if (current() === key) { doc.innerHTML = html; scrollTo(0, 0); }   // unless another page was opened meanwhile
+}
+addEventListener('hashchange', () => { route(); if (window.goatcounter) goatcounter.count({ path: location.pathname + location.hash }); });
+route();
+</script>
+</body>
+</html>
