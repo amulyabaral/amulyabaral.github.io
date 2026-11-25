@@ -16,6 +16,7 @@ Doctoral project: *AntibiotiKu: Antibiotic use and antibiotic resistance in Norw
 - Assessed the data quality of the national VetReg prescription database and developed an error-correction framework; produced the first complete description of antimicrobial use in Norwegian cattle (2018–2023) using DDDvet metrics.
 - Characterized faecal resistomes from 551 cattle (HUNT One Health cohort) with shotgun metagenomics, linking resistance genes to animal metadata and microbiota.
 - Secured a 50,000 NOK additional grant from NORM for sequencing and sample processing.
+- Taught the metagenomics and environmental AMR surveillance module in BIO328 (*Environmental DNA: Principles, methods, and applications in ecology and environmental monitoring*), leading a case study.
 - Board member for 2026 and responsible for all communication channels at SoDoC, a non-political interest organization for PhD candidates, postdocs and temporary researchers at NMBU.
 
 **Visiting PhD scholar · DTU National Food Institute**
@@ -50,12 +51,20 @@ Thesis: Prevalence of extended-spectrum β-lactamase producing pathogens in curr
 
 ## Publications
 
-Peer-reviewed articles. The full list, with preprints and submitted manuscripts, is on the [papers page](#papers).
+Peer-reviewed articles and PhD thesis manuscripts. The full list, including preprints and submitted manuscripts, is on the [papers page](#papers).
 
-- **Baral A**, Eriksen EØ, Llarena AK, Holmøy IH, Helgesen KO, Smistad M, Wasteson Y, Toftaker I. Estimating antimicrobial use in Norwegian cattle (2018–2023): a quality assessment and error-correction approach for veterinary prescription data. *Preventive Veterinary Medicine*. 2026, in press.
+**Peer-reviewed articles**
+
+- **Baral A**, Eriksen EØ, Llarena AK, Holmøy IH, Helgesen KO, Smistad M, Wasteson Y, Toftaker I. Estimating antimicrobial use in Norwegian cattle (2018–2023): a quality assessment and error-correction approach for veterinary prescription data. *Preventive Veterinary Medicine*. 2026;258:107077.
+- Vojtková M, Baltušis M, Martiny HM, **Baral A**, Pyrounakis N, Beleon A, Freitag R, Pico-Tomàs A, Kaas RS, Petersen TN, Munk P. PanRes: a database of latent and acquired antimicrobial resistance allowing 3D-based protein homology search. *Bioinformatics*. 2026;42(10):btag776.
 - Ahmadi A, Oma VS, Ånestad LM, Falkeid SE, **Baral A**, Khezri A, Klem TB, Stokstad M, Llarena AK. Genomic diversity and virulence of *Pasteurella multocida* in Norwegian calves. *Microbial Genomics*. 2026;12(6):001735.
 - Abramova A, **Baral A**, Osińska AD, et al. Roadmap for integrated One Health AMR surveillance in Nordic countries. *Public Health*. 2026;255:106285.
 - Witsø IL, **Baral A**, Llarena AK, Aspholm M, Myrmel M, Wasteson Y. Plastispheres as reservoirs of antimicrobial resistance: Insights from metagenomic analyses across aquatic environments. *PLOS ONE*. 2025;20(9):e0330754.
+
+**PhD thesis manuscripts**
+
+- **Baral A**, et al. Defining a baseline resistome: fecal antimicrobial resistance genes in Norwegian cattle under minimal antibiotic selection. *Manuscript*.
+- **Baral A**, et al. Effect of the enteric methane inhibitor 3-nitrooxypropanol (Bovaer) on the fecal resistome of cattle in a 2×2 factorial feeding trial. *In preparation*.
 
 ## Software
 
