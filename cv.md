@@ -14,7 +14,9 @@ PhD student at NMBU applying large-scale metagenomics to analyze antimicrobial r
 Doctoral project: *AntibiotiKu: Antibiotic use and antibiotic resistance in Norwegian cattle*. Supervisors: Ingrid Toftaker (main), Ann-Katrin Llarena and Yngvild Wasteson.
 
 - Assessed the data quality of the national VetReg prescription database and developed an error-correction framework; produced the first complete description of antimicrobial use in Norwegian cattle (2018–2023) using DDDvet metrics.
-- Characterized faecal resistomes from 551 cattle (HUNT One Health cohort) with shotgun metagenomics, linking resistance genes to animal metadata and microbiota.
+- Characterized faecal resistomes from 510 cattle across 183 farms (HUNT One Health cohort) with shotgun metagenomics, linking resistance genes to farm and animal metadata, assessing their mobility and genomic context, and benchmarking against 209 public cattle metagenomes from 14 international studies.
+- Conducted longitudinal faecal sampling and automated DNA extraction across three time points in a 2×2 factorial feeding trial (56 cows) to evaluate effects of the enteric methane inhibitor 3-nitrooxypropanol (Bovaer) on the bovine faecal resistome and microbiome.
+- Mapped Nordic AMU/AMR surveillance systems across five countries and co-authored a roadmap for integrated One Health surveillance through the NordForsk NoMoReAMR consortium.
 - Secured a 50,000 NOK additional grant from NORM for sequencing and sample processing.
 - Taught the metagenomics and environmental AMR surveillance module in BIO328 (*Environmental DNA: Principles, methods, and applications in ecology and environmental monitoring*).
 - Board member for 2026 and responsible for all communication channels at SoDoC, a non-political interest organization for PhD candidates, postdocs and temporary researchers at NMBU.
