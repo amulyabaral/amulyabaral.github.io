@@ -16,7 +16,7 @@ Doctoral project: *AntibiotiKu: Antibiotic use and antibiotic resistance in Norw
 - Assessed the data quality of the national VetReg prescription database and developed an error-correction framework; produced the first complete description of antimicrobial use in Norwegian cattle (2018–2023) using DDDvet metrics.
 - Characterized faecal resistomes from 551 cattle (HUNT One Health cohort) with shotgun metagenomics, linking resistance genes to animal metadata and microbiota.
 - Secured a 50,000 NOK additional grant from NORM for sequencing and sample processing.
-- Taught the metagenomics and environmental AMR surveillance module in BIO328 (*Environmental DNA: Principles, methods, and applications in ecology and environmental monitoring*), leading a case study.
+- Taught the metagenomics and environmental AMR surveillance module in BIO328 (*Environmental DNA: Principles, methods, and applications in ecology and environmental monitoring*).
 - Board member for 2026 and responsible for all communication channels at SoDoC, a non-political interest organization for PhD candidates, postdocs and temporary researchers at NMBU.
 
 **Visiting PhD scholar · DTU National Food Institute**
